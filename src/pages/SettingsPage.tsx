@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
+import Modal from '../components/ui/Modal';
 import { showSuccessToast } from '../components/ui/toast';
 
 function SettingsPage() {
@@ -12,23 +13,43 @@ function SettingsPage() {
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
 
+  const [isProfileEditOpen, setIsProfileEditOpen] = useState(false);
+  const [editName, setEditName] = useState(name);
+  const [editEmail, setEditEmail] = useState(email);
+  const [editPhone, setEditPhone] = useState(phone);
+
   const [defaultCommissionPercent, setDefaultCommissionPercent] = useState('10');
   const [approvalRequired, setApprovalRequired] = useState(true);
   const [maxOutletsPerFranchise, setMaxOutletsPerFranchise] = useState('50');
+
+  const openEditProfileModal = () => {
+    setEditName(name);
+    setEditEmail(email);
+    setEditPhone(phone);
+    setNameError('');
+    setEmailError('');
+    setIsProfileEditOpen(true);
+  };
+
+  const closeEditProfileModal = () => {
+    setIsProfileEditOpen(false);
+    setNameError('');
+    setEmailError('');
+  };
 
   const handleSaveProfile = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     let isValid = true;
 
-    if (name.trim().length === 0) {
+    if (editName.trim().length === 0) {
       setNameError('Name is required');
       isValid = false;
     } else {
       setNameError('');
     }
 
-    if (email.trim().length === 0) {
+    if (editEmail.trim().length === 0) {
       setEmailError('Email is required');
       isValid = false;
     } else {
@@ -39,6 +60,11 @@ function SettingsPage() {
       return;
     }
 
+    setName(editName.trim());
+    setEmail(editEmail.trim());
+    setPhone(editPhone.trim());
+    setIsProfileEditOpen(false);
+
     showSuccessToast('Settings updated (demo)');
   };
 
@@ -48,49 +74,70 @@ function SettingsPage() {
 
       <section className="rounded-xl border border-emerald-100 bg-white p-4 shadow-sm transition hover:shadow-md">
         <h2 className="text-lg font-semibold text-emerald-900">Profile Settings</h2>
-        <form onSubmit={handleSaveProfile}>
-          <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <Input id="settings-name" label="Name" type="text" value={name} disabled />
+          <Input id="settings-email" label="Email" type="email" value={email} disabled />
+          <Input id="settings-phone" label="Phone" type="tel" value={phone} disabled />
+        </div>
+        <div className="mt-4">
+          <Button
+            type="button"
+            variant="primary"
+            onClick={openEditProfileModal}
+            className="transition-all duration-150 active:scale-95"
+          >
+            Edit
+          </Button>
+        </div>
+      </section>
+
+      <Modal
+        isOpen={isProfileEditOpen}
+        title="Edit Profile"
+        onClose={closeEditProfileModal}
+        className="max-w-2xl max-h-[95vh] overflow-y-auto p-3"
+      >
+        <form className="space-y-4 w-full" onSubmit={handleSaveProfile}>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <Input
-              id="settings-name"
+              id="settings-name-edit"
               label="Name"
               type="text"
-              value={name}
+              value={editName}
               onChange={(event) => {
-                setName(event.target.value);
-                if (nameError) {
-                  setNameError('');
-                }
+                setEditName(event.target.value);
+                if (nameError) setNameError('');
               }}
               error={nameError}
             />
             <Input
-              id="settings-email"
+              id="settings-email-edit"
               label="Email"
               type="email"
-              value={email}
+              value={editEmail}
               onChange={(event) => {
-                setEmail(event.target.value);
-                if (emailError) {
-                  setEmailError('');
-                }
+                setEditEmail(event.target.value);
+                if (emailError) setEmailError('');
               }}
               error={emailError}
             />
             <Input
-              id="settings-phone"
+              id="settings-phone-edit"
               label="Phone"
               type="tel"
-              value={phone}
-              onChange={(event) => setPhone(event.target.value)}
+              value={editPhone}
+              onChange={(event) => setEditPhone(event.target.value)}
             />
           </div>
-          <div className="mt-4">
-            <Button type="submit" className="transition-all duration-150 active:scale-95">
-              Save Changes
+
+          <div className="flex justify-end gap-2 pt-2">
+            <Button type="button" variant="secondary" onClick={closeEditProfileModal}>
+              Cancel
             </Button>
+            <Button type="submit">Save Changes</Button>
           </div>
         </form>
-      </section>
+      </Modal>
 
       <section className="rounded-xl border bg-white p-4 shadow-sm transition hover:shadow-md">
         <h2 className="text-lg font-semibold text-gray-900">Password</h2>

@@ -7,10 +7,11 @@ type ModalProps = {
   title?: string;
   description?: string;
   onClose: () => void;
+  showCloseButton?: boolean;
   className?: string;
 };
 
-function Modal({ children, isOpen, title, description, onClose, className }: ModalProps) {
+function Modal({ children, isOpen, title, description, onClose, showCloseButton = true, className }: ModalProps) {
   const titleId = useId();
   const descriptionId = useId();
 
@@ -20,7 +21,7 @@ function Modal({ children, isOpen, title, description, onClose, className }: Mod
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
+      className="fixed inset-0 z-50 flex items-start justify-center bg-black/40 p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby={title ? titleId : undefined}
@@ -31,14 +32,16 @@ function Modal({ children, isOpen, title, description, onClose, className }: Mod
           <h2 id={title ? titleId : undefined} className="text-lg font-semibold text-gray-900">
             {title}
           </h2>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close modal"
-            className="rounded-lg px-2 py-1 text-sm text-gray-500 hover:bg-gray-100"
-          >
-            Close
-          </button>
+          {showCloseButton ? (
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Close modal"
+              className="rounded-lg px-2 py-1 text-sm text-gray-500 hover:bg-gray-100"
+            >
+              Close
+            </button>
+          ) : null}
         </div>
         {description ? (
           <p id={descriptionId} className="mb-3 text-sm text-gray-600">

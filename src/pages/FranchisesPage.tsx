@@ -337,11 +337,18 @@ function FranchisesPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-emerald-900">Franchises</h1>
-        <p className="mt-1 text-sm text-gray-600">
-          Manage franchise partners who own or operate multiple restaurants under your brand.
-        </p>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight text-emerald-900">Franchises</h1>
+          <p className="mt-1 text-sm text-gray-600">
+            Manage franchise partners who own or operate multiple restaurants under your brand.
+          </p>
+        </div>
+        <div>
+          <Button onClick={openAddFranchiseModal} className="rounded-lg">
+            Add Franchise
+          </Button>
+        </div>
       </div>
 
       {loading ? (
@@ -419,7 +426,7 @@ function FranchisesPage() {
                     </TableCell>
                     <TableCell>{franchise.createdAt}</TableCell>
                     <TableCell>
-                      <div className="flex flex-wrap items-center gap-2">
+                      <div className="flex flex-nowrap items-center gap-2">
                         <Button variant="secondary" size="sm" onClick={() => handleViewDetails(franchise)}>
                           View Details
                         </Button>
@@ -434,11 +441,16 @@ function FranchisesPage() {
                             <Button variant="danger" size="sm" onClick={() => handleReject(franchise)}>
                               Reject
                             </Button>
+                            <Button variant="danger" size="sm" onClick={() => handleDelete(franchise)}>
+                              Delete
+                            </Button>
                           </>
                         ) : null}
-                        <Button variant="danger" size="sm" onClick={() => handleDelete(franchise)}>
-                          Delete
-                        </Button>
+                        {franchise.status !== 'Pending' ? (
+                          <Button variant="danger" size="sm" onClick={() => handleDelete(franchise)}>
+                            Delete
+                          </Button>
+                        ) : null}
                       </div>
                     </TableCell>
                   </TableRow>
@@ -460,80 +472,88 @@ function FranchisesPage() {
         isOpen={isAddOpen}
         title={isEditMode ? 'Edit Franchise' : 'Add Franchise'}
         onClose={closeAddFranchiseModal}
-        className="max-h-[85vh] overflow-y-auto"
+        className="max-w-3xl max-h-[95vh] overflow-y-auto p-3"
       >
         <form className="space-y-4 w-full" onSubmit={handleAddFranchiseSubmit}>
-          <Input
-            id="franchise-name"
-            label="Franchise Name"
-            type="text"
-            value={formFranchiseName}
-            onChange={(event) => setFormFranchiseName(event.target.value)}
-            error={franchiseNameError}
-          />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Input
+              id="franchise-name"
+              label="Franchise Name"
+              type="text"
+              value={formFranchiseName}
+              onChange={(event) => setFormFranchiseName(event.target.value)}
+              error={franchiseNameError}
+            />
 
-          <Input
-            id="franchise-owner-name"
-            label="Owner Name"
-            type="text"
-            value={formOwnerName}
-            onChange={(event) => setFormOwnerName(event.target.value)}
-            error={ownerNameError}
-          />
+            <Input
+              id="franchise-owner-name"
+              label="Owner Name"
+              type="text"
+              value={formOwnerName}
+              onChange={(event) => setFormOwnerName(event.target.value)}
+              error={ownerNameError}
+            />
+          </div>
 
-          <Input
-            id="franchise-email"
-            label="Email"
-            type="email"
-            value={formEmail}
-            onChange={(event) => setFormEmail(event.target.value)}
-            error={emailError}
-          />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Input
+              id="franchise-email"
+              label="Email"
+              type="email"
+              value={formEmail}
+              onChange={(event) => setFormEmail(event.target.value)}
+              error={emailError}
+            />
 
-          <Input
-            id="franchise-phone"
-            label="Phone"
-            type="tel"
-            value={formPhone}
-            onChange={(event) => setFormPhone(event.target.value)}
-            error={phoneError}
-          />
+            <Input
+              id="franchise-phone"
+              label="Phone"
+              type="tel"
+              value={formPhone}
+              onChange={(event) => setFormPhone(event.target.value)}
+              error={phoneError}
+            />
+          </div>
 
-          <Select
-            id="franchise-city"
-            label="City"
-            value={formCity}
-            onChange={(event) => setFormCity(event.target.value)}
-            placeholder="Select City"
-            options={cityOptions.filter((c) => c.value !== '')}
-            error={cityError}
-          />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Select
+              id="franchise-city"
+              label="City"
+              value={formCity}
+              onChange={(event) => setFormCity(event.target.value)}
+              placeholder="Select City"
+              options={cityOptions.filter((c) => c.value !== '')}
+              error={cityError}
+            />
 
-          <Input
-            id="franchise-outlets"
-            label="Number of Outlets"
-            type="number"
-            value={formOutlets}
-            onChange={(event) => setFormOutlets(event.target.value)}
-            error={outletsError}
-          />
+            <Input
+              id="franchise-outlets"
+              label="Number of Outlets"
+              type="number"
+              value={formOutlets}
+              onChange={(event) => setFormOutlets(event.target.value)}
+              error={outletsError}
+            />
+          </div>
 
-          <Input
-            id="franchise-initial-investment"
-            label="Initial Investment (optional)"
-            type="number"
-            value={formInitialInvestment}
-            onChange={(event) => setFormInitialInvestment(event.target.value)}
-          />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Input
+              id="franchise-initial-investment"
+              label="Initial Investment (optional)"
+              type="number"
+              value={formInitialInvestment}
+              onChange={(event) => setFormInitialInvestment(event.target.value)}
+            />
 
-          <Input
-            id="franchise-agreement-start-date"
-            label="Agreement Start Date"
-            type="date"
-            value={formAgreementStartDate}
-            onChange={(event) => setFormAgreementStartDate(event.target.value)}
-            error={agreementStartDateError}
-          />
+            <Input
+              id="franchise-agreement-start-date"
+              label="Agreement Start Date"
+              type="date"
+              value={formAgreementStartDate}
+              onChange={(event) => setFormAgreementStartDate(event.target.value)}
+              error={agreementStartDateError}
+            />
+          </div>
 
           <Select
             id="franchise-status"

@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { Inbox } from 'lucide-react';
+import Modal from '../components/ui/Modal';
 import Badge from '../components/ui/Badge';
 import Button from '../components/ui/Button';
 import EmptyState from '../components/ui/EmptyState';
@@ -9,6 +10,7 @@ import Pagination from '../components/ui/Pagination';
 import Select from '../components/ui/Select';
 import Table, { TableCell, TableRow } from '../components/ui/Table';
 import { usersMock } from '../data/users.mock';
+import { showSuccessToast } from '../components/ui/toast';
 import type { User } from '../types/user';
 
 type UserStatus = 'Active' | 'Disabled';
@@ -33,6 +35,19 @@ function UsersPage() {
   const [roleFilter, setRoleFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+
+  const [selectedViewUser, setSelectedViewUser] = useState<UserRow | null>(null);
+  const [selectedDisableUser, setSelectedDisableUser] = useState<UserRow | null>(null);
+
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [editTargetId, setEditTargetId] = useState<string | null>(null);
+  const [formName, setFormName] = useState('');
+  const [formEmail, setFormEmail] = useState('');
+  const [formRole, setFormRole] = useState('');
+  const [formStatus, setFormStatus] = useState<UserStatus>('Active');
+  const [nameError, setNameError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [roleError, setRoleError] = useState('');
 
   useEffect(() => {
     setLoading(true);
@@ -66,6 +81,11 @@ function UsersPage() {
     { label: 'Disabled', value: 'Disabled' },
   ];
 
+  const userStatusOptions = [
+    { label: 'Active', value: 'Active' },
+    { label: 'Disabled', value: 'Disabled' },
+  ];
+
   const filteredUsers = useMemo(
     () =>
       users.filter((user) => {
@@ -81,8 +101,88 @@ function UsersPage() {
   );
 
   const paginatedUsers = filteredUsers.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
-  const handleUserAction = (action: 'View' | 'Edit' | 'Disable') => {
-    alert(`${action} action (demo mode)`);
+
+  const editRoleOptions = useMemo(() => roleOptions.filter((opt) => opt.value !== ''), [roleOptions]);
+
+  const openEditUserModal = (user: UserRow) => {
+    setFormName(user.name);
+    setFormEmail(user.email);
+    setFormRole(user.role);
+    setFormStatus(user.status);
+    setNameError('');
+    setEmailError('');
+    setRoleError('');
+    setEditTargetId(user.id);
+    setIsEditOpen(true);
+  };
+
+  const closeEditUserModal = () => {
+    setIsEditOpen(false);
+    setEditTargetId(null);
+  };
+
+  const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+
+  const handleEditUserSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    let valid = true;
+    const nextName = formName.trim();
+    const nextEmail = formEmail.trim();
+
+    if (nextName.length === 0) {
+      setNameError('Name is required');
+      valid = false;
+    } else {
+      setNameError('');
+    }
+
+    if (nextEmail.length === 0) {
+      setEmailError('Email is required');
+      valid = false;
+    } else if (!isValidEmail(nextEmail)) {
+      setEmailError('Email format is invalid');
+      valid = false;
+    } else {
+      setEmailError('');
+    }
+
+    if (formRole.trim().length === 0) {
+      setRoleError('Role is required');
+      valid = false;
+    } else {
+      setRoleError('');
+    }
+
+    if (!valid) return;
+    if (!editTargetId) return;
+
+    setUsers((prev) =>
+      prev.map((u) =>
+        u.id === editTargetId
+          ? {
+              ...u,
+              name: nextName,
+              email: nextEmail,
+              role: formRole,
+              status: formStatus,
+            }
+          : u,
+      ),
+    );
+
+    setIsEditOpen(false);
+    setEditTargetId(null);
+    showSuccessToast('User updated (demo)');
+  };
+
+  const handleConfirmDisable = () => {
+    if (!selectedDisableUser) return;
+    const id = selectedDisableUser.id;
+
+    setUsers((prev) => prev.map((u) => (u.id === id ? { ...u, status: 'Disabled' } : u)));
+    setSelectedDisableUser(null);
+    showSuccessToast('User disabled');
   };
 
   useEffect(() => {
@@ -143,13 +243,13 @@ function UsersPage() {
                     <TableCell>{user.createdDate}</TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
-                        <Button variant="secondary" size="sm" onClick={() => handleUserAction('View')}>
+                        <Button variant="secondary" size="sm" onClick={() => setSelectedViewUser(user)}>
                           View
                         </Button>
-                        <Button variant="secondary" size="sm" onClick={() => handleUserAction('Edit')}>
+                        <Button variant="secondary" size="sm" onClick={() => openEditUserModal(user)}>
                           Edit
                         </Button>
-                        <Button variant="danger" size="sm" onClick={() => handleUserAction('Disable')}>
+                        <Button variant="danger" size="sm" onClick={() => setSelectedDisableUser(user)}>
                           Disable
                         </Button>
                       </div>
@@ -168,6 +268,126 @@ function UsersPage() {
           )}
         </>
       )}
+
+      <Modal
+        isOpen={Boolean(selectedViewUser)}
+        title="View"
+        onClose={() => setSelectedViewUser(null)}
+        showCloseButton={false}
+      >
+        {selectedViewUser ? (
+          <div className="space-y-2 text-sm text-gray-700">
+            <p>View action (demo mode)</p>
+            <p>
+              <span className="font-medium text-gray-900">Name:</span> {selectedViewUser.name}
+            </p>
+            <p>
+              <span className="font-medium text-gray-900">Email:</span> {selectedViewUser.email}
+            </p>
+            <p>
+              <span className="font-medium text-gray-900">Role:</span> {selectedViewUser.role}
+            </p>
+            <p>
+              <span className="font-medium text-gray-900">Status:</span> {selectedViewUser.status}
+            </p>
+            <p>
+              <span className="font-medium text-gray-900">Created Date:</span> {selectedViewUser.createdDate}
+            </p>
+          </div>
+        ) : null}
+
+        <div className="mt-4 flex justify-end">
+          <Button variant="secondary" onClick={() => setSelectedViewUser(null)}>
+            OK
+          </Button>
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={Boolean(selectedDisableUser)}
+        title="Disable"
+        onClose={() => setSelectedDisableUser(null)}
+        showCloseButton={false}
+      >
+        {selectedDisableUser ? (
+          <div className="space-y-3 text-sm text-gray-700">
+            <p>Disable action (demo mode)</p>
+            <p>
+              Are you sure you want to disable <span className="font-medium text-gray-900">{selectedDisableUser.name}</span>?
+            </p>
+          </div>
+        ) : null}
+
+        <div className="mt-4 flex justify-end gap-2">
+          <Button variant="secondary" onClick={() => setSelectedDisableUser(null)}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleConfirmDisable}>
+            Disable
+          </Button>
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={isEditOpen}
+        title="Edit User"
+        onClose={closeEditUserModal}
+        className="max-w-2xl max-h-[95vh] overflow-y-auto p-3"
+      >
+        <form className="space-y-4 w-full" onSubmit={handleEditUserSubmit}>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Input
+              label="Name"
+              id="user-name"
+              type="text"
+              value={formName}
+              onChange={(event) => setFormName(event.target.value)}
+              error={nameError}
+            />
+            <Input
+              label="Email"
+              id="user-email"
+              type="email"
+              value={formEmail}
+              onChange={(event) => setFormEmail(event.target.value)}
+              error={emailError}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <Select
+              label="Role"
+              id="user-role"
+              value={formRole}
+              onChange={(event) => setFormRole(event.target.value)}
+              options={
+                editRoleOptions.length > 0
+                  ? editRoleOptions
+                  : [
+                      { label: 'Admin', value: 'Admin' },
+                      { label: 'User', value: 'User' },
+                    ]
+              }
+              error={roleError}
+            />
+
+            <Select
+              label="Status"
+              id="user-status"
+              value={formStatus}
+              onChange={(event) => setFormStatus(event.target.value as UserStatus)}
+              options={userStatusOptions}
+            />
+          </div>
+
+          <div className="flex justify-end gap-2 pt-2">
+            <Button variant="secondary" type="button" onClick={closeEditUserModal}>
+              Cancel
+            </Button>
+            <Button type="submit">Save Changes</Button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 }
