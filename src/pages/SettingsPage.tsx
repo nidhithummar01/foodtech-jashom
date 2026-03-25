@@ -12,6 +12,10 @@ function SettingsPage() {
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
 
+  const [defaultCommissionPercent, setDefaultCommissionPercent] = useState('10');
+  const [approvalRequired, setApprovalRequired] = useState(true);
+  const [maxOutletsPerFranchise, setMaxOutletsPerFranchise] = useState('50');
+
   const handleSaveProfile = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -40,10 +44,10 @@ function SettingsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold tracking-tight text-gray-900">Settings</h1>
+      <h1 className="text-2xl font-semibold tracking-tight text-emerald-900">Settings</h1>
 
-      <section className="rounded-xl border bg-white p-4 shadow-sm transition hover:shadow-md">
-        <h2 className="text-lg font-semibold text-gray-900">Profile Settings</h2>
+      <section className="rounded-xl border border-emerald-100 bg-white p-4 shadow-sm transition hover:shadow-md">
+        <h2 className="text-lg font-semibold text-emerald-900">Profile Settings</h2>
         <form onSubmit={handleSaveProfile}>
           <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
             <Input
@@ -99,8 +103,8 @@ function SettingsPage() {
         </div>
       </section>
 
-      <section className="rounded-xl border bg-white p-4 shadow-sm transition hover:shadow-md">
-        <h2 className="text-lg font-semibold text-gray-900">System Settings</h2>
+      <section className="rounded-xl border border-emerald-100 bg-white p-4 shadow-sm transition hover:shadow-md">
+        <h2 className="text-lg font-semibold text-emerald-900">System Settings</h2>
         <div className="mt-4 space-y-4">
           <label className="flex items-center justify-between rounded-lg border p-3">
             <span className="text-sm font-medium text-gray-700">Enable Notifications</span>
@@ -108,7 +112,7 @@ function SettingsPage() {
               type="button"
               onClick={() => setNotificationsEnabled((prev) => !prev)}
               className={`relative h-6 w-11 rounded-full transition-all duration-200 ${
-                notificationsEnabled ? 'bg-black' : 'bg-gray-300'
+                notificationsEnabled ? 'bg-emerald-600' : 'bg-gray-300'
               }`}
               aria-pressed={notificationsEnabled}
               aria-label="Toggle notifications"
@@ -127,7 +131,7 @@ function SettingsPage() {
               type="button"
               onClick={() => setDarkModeEnabled((prev) => !prev)}
               className={`relative h-6 w-11 rounded-full transition-all duration-200 ${
-                darkModeEnabled ? 'bg-black' : 'bg-gray-300'
+                darkModeEnabled ? 'bg-emerald-600' : 'bg-gray-300'
               }`}
               aria-pressed={darkModeEnabled}
               aria-label="Toggle dark mode"
@@ -135,6 +139,47 @@ function SettingsPage() {
               <span
                 className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all duration-200 ${
                   darkModeEnabled ? 'left-5' : 'left-0.5'
+                }`}
+              />
+            </button>
+          </label>
+        </div>
+      </section>
+
+      <section className="rounded-xl border border-emerald-100 bg-white p-4 shadow-sm transition hover:shadow-md">
+        <h2 className="text-lg font-semibold text-emerald-900">Franchise Settings</h2>
+        <div className="mt-4 space-y-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <Input
+              id="default-commission"
+              label="Default commission (%)"
+              type="number"
+              value={defaultCommissionPercent}
+              onChange={(event) => setDefaultCommissionPercent(event.target.value)}
+            />
+            <Input
+              id="max-outlets"
+              label="Max outlets per franchise"
+              type="number"
+              value={maxOutletsPerFranchise}
+              onChange={(event) => setMaxOutletsPerFranchise(event.target.value)}
+            />
+          </div>
+
+          <label className="flex items-center justify-between rounded-lg border p-3">
+            <span className="text-sm font-medium text-gray-700">Approval required</span>
+            <button
+              type="button"
+              onClick={() => setApprovalRequired((prev) => !prev)}
+              className={`relative h-6 w-11 rounded-full transition-all duration-200 ${
+                approvalRequired ? 'bg-emerald-600' : 'bg-gray-300'
+              }`}
+              aria-pressed={approvalRequired}
+              aria-label="Toggle approval required"
+            >
+              <span
+                className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all duration-200 ${
+                  approvalRequired ? 'left-5' : 'left-0.5'
                 }`}
               />
             </button>

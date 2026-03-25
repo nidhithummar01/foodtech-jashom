@@ -69,7 +69,7 @@ function RestaurantsPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-semibold">Restaurants</h1>
+        <h1 className="text-2xl font-semibold text-emerald-900">Restaurants</h1>
         <Loader variant="skeleton" lines={6} />
       </div>
     );
@@ -77,7 +77,7 @@ function RestaurantsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">Restaurants</h1>
+      <h1 className="text-2xl font-semibold text-emerald-900">Restaurants</h1>
 
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         <Input

@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import DashboardPage from '../pages/DashboardPage';
+import FranchisesPage from '../pages/FranchisesPage';
 import OrdersPage from '../pages/OrdersPage';
 import ReportsPage from '../pages/ReportsPage';
 import RestaurantsPage from '../pages/RestaurantsPage';
@@ -15,6 +16,7 @@ function AppRoutes() {
       <Route path="/restaurants" element={<RestaurantsPage />} />
       <Route path="/orders" element={<OrdersPage />} />
       <Route path="/reports" element={<ReportsPage />} />
+      <Route path="/franchises" element={<FranchisesPage />} />
       <Route path="/settings" element={<SettingsPage />} />
     </Routes>
   );

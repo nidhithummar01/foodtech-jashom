@@ -8,6 +8,7 @@ import Select from '../components/ui/Select';
 import Table, { TableCell, TableRow } from '../components/ui/Table';
 import { showInfoToast } from '../components/ui/toast';
 import { reportsMock } from '../data/reports.mock';
+import { franchisesMock } from '../data/franchises.mock';
 
 type ReportType = 'Sales' | 'Users' | 'Orders';
 type ReportStatus = 'Ready' | 'Generating' | 'Failed';
@@ -47,6 +48,8 @@ function ReportsPage() {
   const [dateRange, setDateRange] = useState('');
   const [reportType, setReportType] = useState('');
 
+  const formatInr = (amount: number) => `₹${amount.toLocaleString('en-IN')}`;
+
   useEffect(() => {
     const timeout = window.setTimeout(() => {
       setLoading(false);
@@ -78,11 +81,24 @@ function ReportsPage() {
   );
 
   const reportCards = [
-    { label: 'Revenue', value: '$12,500' },
+    { label: 'Revenue', value: '₹12,500' },
     { label: 'Orders', value: '320' },
     { label: 'Growth', value: '+12%' },
     { label: 'Cancellations', value: '18' },
   ];
+
+  const sortedFranchisesByRevenue = useMemo(
+    () => [...franchisesMock].sort((a, b) => b.revenue - a.revenue),
+    [],
+  );
+
+  const topFranchise = sortedFranchisesByRevenue[0];
+  const secondFranchise = sortedFranchisesByRevenue[1];
+  const growthRatePercent =
+    topFranchise && secondFranchise && secondFranchise.revenue > 0
+      ? ((topFranchise.revenue - secondFranchise.revenue) / secondFranchise.revenue) * 100
+      : 0;
+  const growthRateText = `${growthRatePercent >= 0 ? '+' : ''}${growthRatePercent.toFixed(0)}%`;
 
   const handleExport = () => {
     showInfoToast('Export started (demo mode)');
@@ -96,7 +112,7 @@ function ReportsPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-semibold tracking-tight text-gray-900">Reports</h1>
+        <h1 className="text-2xl font-semibold tracking-tight text-emerald-900">Reports</h1>
         <Loader variant="skeleton" lines={6} />
       </div>
     );
@@ -104,9 +120,9 @@ function ReportsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold tracking-tight text-gray-900">Reports</h1>
+      <h1 className="text-2xl font-semibold tracking-tight text-emerald-900">Reports</h1>
 
-      <section className="rounded-xl border bg-white p-4 shadow-sm">
+      <section className="rounded-xl border border-emerald-100 bg-white p-4 shadow-sm">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Select
             id="report-date"
@@ -138,13 +154,13 @@ function ReportsPage() {
             <div className="flex gap-2">
               <Button
                 onClick={handleExport}
-                className="rounded-lg bg-black px-4 py-2 text-white transition-all duration-150 hover:bg-black/80 active:scale-95"
+                className="rounded-lg bg-emerald-600 px-4 py-2 text-white transition-all duration-150 hover:bg-emerald-700 active:scale-95"
               >
                 Export CSV
               </Button>
               <Button
                 onClick={handleExport}
-                className="rounded-lg bg-black px-4 py-2 text-white transition-all duration-150 hover:bg-black/80 active:scale-95"
+                className="rounded-lg bg-emerald-600 px-4 py-2 text-white transition-all duration-150 hover:bg-emerald-700 active:scale-95"
               >
                 Export PDF
               </Button>
@@ -166,13 +182,31 @@ function ReportsPage() {
       </section>
 
       <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <div className="rounded-lg border bg-white p-4 shadow-sm">
-          <h2 className="text-sm font-medium text-gray-700">Performance Trend</h2>
+        <div className="rounded-lg border border-emerald-100 bg-white p-4 shadow-sm">
+          <h2 className="text-sm font-medium text-emerald-900">Performance Trend</h2>
           <div className="mt-3 h-40 rounded-lg border border-dashed bg-gray-50" />
         </div>
-        <div className="rounded-lg border bg-white p-4 shadow-sm">
-          <h2 className="text-sm font-medium text-gray-700">Channel Split</h2>
+        <div className="rounded-lg border border-emerald-100 bg-white p-4 shadow-sm">
+          <h2 className="text-sm font-medium text-emerald-900">Channel Split</h2>
           <div className="mt-3 h-40 rounded-lg border border-dashed bg-gray-50" />
+        </div>
+      </section>
+
+      <section className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="rounded-lg border border-emerald-100 bg-white p-4 shadow-sm">
+          <h2 className="text-sm font-medium text-emerald-900">Revenue by Franchise</h2>
+          <div className="mt-3 h-40 rounded-lg border border-dashed bg-gray-50" />
+        </div>
+        <div className="rounded-lg border border-emerald-100 bg-white p-4 shadow-sm">
+          <h2 className="text-sm font-medium text-emerald-900">Top Performing Franchise</h2>
+          <p className="mt-2 text-base font-semibold text-emerald-900">{topFranchise?.name ?? '-'}</p>
+          <p className="mt-1 text-sm text-gray-600">
+            {topFranchise ? formatInr(topFranchise.revenue) : null}
+          </p>
+        </div>
+        <div className="rounded-lg border border-emerald-100 bg-white p-4 shadow-sm">
+          <h2 className="text-sm font-medium text-emerald-900">Franchise Growth Rate</h2>
+          <p className="mt-2 text-2xl font-semibold text-emerald-900">{growthRateText}</p>
         </div>
       </section>
 

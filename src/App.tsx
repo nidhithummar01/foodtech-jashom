@@ -4,7 +4,7 @@ import AppRoutes from './routes/AppRoutes';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-emerald-50/40">
       <Sidebar />
       <div className="flex min-h-screen flex-col md:pl-64">
         <Topbar />

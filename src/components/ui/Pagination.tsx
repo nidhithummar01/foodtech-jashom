@@ -9,23 +9,23 @@ type PaginationProps = {
 function Pagination({ currentPage, totalPages, onPrevious, onNext, className }: PaginationProps) {
   return (
     <div className={className}>
-      <div className="flex items-center justify-between rounded-lg border bg-white px-4 py-3 shadow-sm">
+      <div className="flex items-center justify-between rounded-lg border border-emerald-100 bg-white px-4 py-3 shadow-sm">
         <button
           type="button"
           onClick={onPrevious}
           disabled={currentPage <= 1}
-          className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm text-gray-700 shadow-sm transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-lg border border-emerald-200 px-3 py-1.5 text-sm text-emerald-900 shadow-sm transition-colors hover:bg-emerald-50 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Previous
         </button>
-        <span className="text-sm text-gray-600">
+        <span className="text-sm text-emerald-900/80">
           Page {currentPage} of {totalPages}
         </span>
         <button
           type="button"
           onClick={onNext}
           disabled={currentPage >= totalPages}
-          className="rounded-lg border border-gray-300 px-3 py-1.5 text-sm text-gray-700 shadow-sm transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-lg border border-emerald-200 px-3 py-1.5 text-sm text-emerald-900 shadow-sm transition-colors hover:bg-emerald-50 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Next
         </button>

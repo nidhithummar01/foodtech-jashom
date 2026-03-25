@@ -81,7 +81,7 @@ function OrdersPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">Orders</h1>
+      <h1 className="text-2xl font-semibold text-emerald-900">Orders</h1>
 
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         <Select
@@ -120,7 +120,7 @@ function OrdersPage() {
               <TableCell className="font-medium text-gray-800">{item.id}</TableCell>
               <TableCell>{item.customerName}</TableCell>
               <TableCell>{item.restaurantName}</TableCell>
-              <TableCell>${item.amount.toFixed(2)}</TableCell>
+              <TableCell>₹{item.amount.toFixed(2)}</TableCell>
               <TableCell>
                 <Badge
                   variant={
@@ -167,7 +167,7 @@ function OrdersPage() {
               <span className="font-medium text-gray-900">Restaurant:</span> {selectedOrder.restaurantName}
             </p>
             <p>
-              <span className="font-medium text-gray-900">Amount:</span> ${selectedOrder.amount.toFixed(2)}
+              <span className="font-medium text-gray-900">Amount:</span> ₹{selectedOrder.amount.toFixed(2)}
             </p>
             <p>
               <span className="font-medium text-gray-900">Status:</span> {selectedOrder.status}

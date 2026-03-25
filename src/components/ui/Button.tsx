@@ -12,8 +12,8 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: 'bg-black text-white hover:bg-gray-800',
-  secondary: 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-50',
+  primary: 'bg-emerald-600 text-white hover:bg-emerald-700',
+  secondary: 'bg-white text-emerald-900 border border-emerald-200 hover:bg-emerald-50',
   danger: 'bg-red-600 text-white hover:bg-red-700',
 };
 
@@ -40,7 +40,7 @@ function Button({
       disabled={disabled || isLoading}
       aria-busy={isLoading || undefined}
       className={clsx(
-        'inline-flex items-center justify-center rounded-lg shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60',
+        'inline-flex items-center justify-center rounded-lg shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/40 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60',
         variantClasses[variant],
         sizeClasses[size],
         className,

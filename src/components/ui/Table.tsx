@@ -27,10 +27,10 @@ export function TableCell({ children, className }: TableCellProps) {
 
 function Table({ headers, children, className }: TableProps) {
   return (
-    <div className={clsx('w-full overflow-x-auto rounded-lg border bg-white shadow-sm', className)}>
+    <div className={clsx('w-full overflow-x-auto rounded-lg border border-emerald-100 bg-white shadow-sm', className)}>
       <table className="min-w-full text-left text-sm">
         {headers && headers.length > 0 ? (
-          <thead className="bg-gray-50 text-gray-700">
+          <thead className="bg-emerald-50/80 text-emerald-900">
             <tr>
               {headers.map((header, index) => (
                 <th key={index} className="px-4 py-3 font-medium">

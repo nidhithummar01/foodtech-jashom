@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Inbox } from 'lucide-react';
 import EmptyState from '../components/ui/EmptyState';
 import { dashboardMock } from '../data/dashboard.mock';
+import { franchisesMock } from '../data/franchises.mock';
 
 type ActivityItem = {
   id: string;
@@ -44,7 +45,8 @@ function DashboardPage() {
       { label: 'Total Users', value: data.totalUsers.toLocaleString() },
       { label: 'Total Restaurants', value: data.totalRestaurants.toLocaleString() },
       { label: 'Total Orders', value: data.totalOrders.toLocaleString() },
-      { label: 'Revenue', value: `$${data.revenue.toLocaleString()}` },
+      { label: 'Revenue', value: `₹${data.revenue.toLocaleString()}` },
+      { label: 'Total Franchises', value: franchisesMock.length.toLocaleString() },
     ];
   }, [data]);
 
@@ -53,7 +55,7 @@ function DashboardPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-semibold">Dashboard</h1>
+        <h1 className="text-2xl font-semibold text-emerald-900">Dashboard</h1>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           {[1, 2, 3, 4].map((i) => (
@@ -66,11 +68,11 @@ function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">Dashboard</h1>
+      <h1 className="text-2xl font-semibold text-emerald-900">Dashboard</h1>
 
       <section className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         {kpis.map((item) => (
-          <div key={item.label} className="rounded-lg border bg-white p-4 shadow-sm">
+          <div key={item.label} className="rounded-lg border border-emerald-100 bg-white p-4 shadow-sm">
             <p className="text-sm text-gray-600">{item.label}</p>
             <p className="mt-2 text-2xl font-semibold text-gray-900">{item.value}</p>
           </div>
@@ -78,18 +80,18 @@ function DashboardPage() {
       </section>
 
       <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <div className="rounded-lg border bg-white p-4 shadow-sm">
-          <h2 className="text-sm font-medium text-gray-700">Orders Overview</h2>
+        <div className="rounded-lg border border-emerald-100 bg-white p-4 shadow-sm">
+          <h2 className="text-sm font-medium text-emerald-900">Orders Overview</h2>
           <div className="mt-3 h-48 rounded-lg border border-dashed bg-gray-50" />
         </div>
-        <div className="rounded-lg border bg-white p-4 shadow-sm">
-          <h2 className="text-sm font-medium text-gray-700">Revenue Trend</h2>
+        <div className="rounded-lg border border-emerald-100 bg-white p-4 shadow-sm">
+          <h2 className="text-sm font-medium text-emerald-900">Revenue Trend</h2>
           <div className="mt-3 h-48 rounded-lg border border-dashed bg-gray-50" />
         </div>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-semibold text-gray-900">Recent Activity</h2>
+        <h2 className="text-lg font-semibold text-emerald-900">Recent Activity</h2>
         {recentActivity.length === 0 ? (
           <EmptyState
             title="No activity yet"
@@ -99,7 +101,7 @@ function DashboardPage() {
             onAction={() => undefined}
           />
         ) : (
-          <div className="rounded-lg border bg-white shadow-sm">
+          <div className="rounded-lg border border-emerald-100 bg-white shadow-sm">
             <ul className="divide-y divide-gray-100">
               {recentActivity.map((item) => (
                 <li key={item.id} className="flex items-center justify-between px-4 py-3">
