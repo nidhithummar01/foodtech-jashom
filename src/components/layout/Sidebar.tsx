@@ -1,16 +1,23 @@
 import { Menu, X } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, type ComponentType } from 'react';
 import clsx from 'clsx';
+import { MdDashboard, MdOutlineShoppingBag } from 'react-icons/md';
+import { LuUsers } from 'react-icons/lu';
+import { IoStorefront, IoSettings } from 'react-icons/io5';
+import { TbReportSearch } from 'react-icons/tb';
+import { FaMapLocationDot } from 'react-icons/fa6';
 
-const menuItems = [
-  { label: 'Dashboard', to: '/dashboard' },
-  { label: 'Users', to: '/users' },
-  { label: 'Restaurants', to: '/restaurants' },
-  { label: 'Orders', to: '/orders' },
-  { label: 'Reports', to: '/reports' },
-  { label: 'Franchises', to: '/franchises' },
-  { label: 'Settings', to: '/settings' },
+type IconProps = { className?: string };
+
+const menuItems: Array<{ label: string; to: string; Icon: ComponentType<IconProps> }> = [
+  { label: 'Dashboard', to: '/dashboard', Icon: MdDashboard },
+  { label: 'Users', to: '/users', Icon: LuUsers },
+  { label: 'Restaurants', to: '/restaurants', Icon: IoStorefront },
+  { label: 'Orders', to: '/orders', Icon: MdOutlineShoppingBag },
+  { label: 'Reports', to: '/reports', Icon: TbReportSearch },
+  { label: 'Franchises', to: '/franchises', Icon: FaMapLocationDot },
+  { label: 'Settings', to: '/settings', Icon: IoSettings },
 ];
 
 function Sidebar() {
@@ -39,13 +46,14 @@ function Sidebar() {
               to={item.to}
               className={({ isActive }) =>
                 clsx(
-                  'rounded-md px-3 py-2 transition-colors',
+                  'flex items-center gap-2 rounded-md px-3 py-2 transition-colors',
                   isActive
                     ? 'bg-emerald-600 font-medium text-white'
                     : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-900',
                 )
               }
             >
+              <item.Icon className="h-4 w-4 shrink-0" />
               {item.label}
             </NavLink>
           ))}
@@ -74,13 +82,14 @@ function Sidebar() {
                 onClick={() => setIsOpen(false)}
                 className={({ isActive }) =>
                   clsx(
-                    'rounded-md px-3 py-2 transition-colors',
+                    'flex items-center gap-2 rounded-md px-3 py-2 transition-colors',
                     isActive
                       ? 'bg-emerald-600 font-medium text-white'
                       : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-900',
                   )
                 }
               >
+                <item.Icon className="h-4 w-4 shrink-0" />
                 {item.label}
               </NavLink>
             ))}

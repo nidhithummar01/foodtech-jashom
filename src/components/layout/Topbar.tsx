@@ -1,6 +1,7 @@
 import { Bell } from 'lucide-react';
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { setAuthenticated } from '../../utils/auth';
 
 const routeTitles: Record<string, string> = {
   '/dashboard': 'Dashboard',
@@ -13,6 +14,7 @@ const routeTitles: Record<string, string> = {
 };
 
 function Topbar() {
+  const navigate = useNavigate();
   const location = useLocation();
   const pageTitle = routeTitles[location.pathname] ?? 'Admin Panel';
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -44,7 +46,15 @@ function Topbar() {
               <button type="button" className="block w-full px-3 py-2 text-left text-sm text-gray-700 hover:bg-emerald-50">
                 Profile
               </button>
-              <button type="button" className="block w-full px-3 py-2 text-left text-sm text-gray-700 hover:bg-emerald-50">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsProfileMenuOpen(false);
+                  setAuthenticated(false);
+                  navigate('/login', { replace: true });
+                }}
+                className="block w-full px-3 py-2 text-left text-sm text-gray-700 hover:bg-emerald-50"
+              >
                 Logout
               </button>
             </div>

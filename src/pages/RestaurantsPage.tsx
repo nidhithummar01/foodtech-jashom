@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Inbox } from 'lucide-react';
+import { FcViewDetails } from 'react-icons/fc';
 import Badge from '../components/ui/Badge';
 import Button from '../components/ui/Button';
 import EmptyState from '../components/ui/EmptyState';
 import Input from '../components/ui/Input';
 import Loader from '../components/ui/Loader';
-import Modal from '../components/ui/Modal';
+import ViewDetailsModal, { emailPill, viewStatusPill } from '../components/ui/ViewDetailsModal';
 import Select from '../components/ui/Select';
 import Table, { TableCell, TableRow } from '../components/ui/Table';
 import { restaurantsMock } from '../data/restaurants.mock';
@@ -131,8 +132,14 @@ function RestaurantsPage() {
               </TableCell>
               <TableCell>{item.createdDate}</TableCell>
               <TableCell>
-                <Button variant="secondary" size="sm" onClick={() => setSelectedRestaurant(item)}>
-                  View Details
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="!border-2 !border-emerald-400 px-2 hover:!border-emerald-500 hover:bg-emerald-50"
+                  aria-label="View details"
+                  onClick={() => setSelectedRestaurant(item)}
+                >
+                  <FcViewDetails className="h-4 w-4 shrink-0" aria-hidden />
                 </Button>
               </TableCell>
             </TableRow>
@@ -140,32 +147,30 @@ function RestaurantsPage() {
         </Table>
       )}
 
-      <Modal
+      <ViewDetailsModal
         isOpen={Boolean(selectedRestaurant)}
-        title="Restaurant Details"
         onClose={() => setSelectedRestaurant(null)}
-      >
-        {selectedRestaurant ? (
-          <div className="space-y-2 text-sm text-gray-700">
-            <p>
-              <span className="font-medium text-gray-900">Name:</span> {selectedRestaurant.name}
-            </p>
-            <p>
-              <span className="font-medium text-gray-900">Owner:</span> {selectedRestaurant.owner}
-            </p>
-            <p>
-              <span className="font-medium text-gray-900">City:</span> {selectedRestaurant.city}
-            </p>
-            <p>
-              <span className="font-medium text-gray-900">Status:</span> {selectedRestaurant.status}
-            </p>
-            <p>
-              <span className="font-medium text-gray-900">Created Date:</span>{' '}
-              {selectedRestaurant.createdDate}
-            </p>
-          </div>
-        ) : null}
-      </Modal>
+        title="Restaurant Details"
+        compact
+        initialsFrom={selectedRestaurant?.name ?? ''}
+        rows={
+          selectedRestaurant
+            ? [
+                {
+                  label: 'Name:',
+                  value: <span className="font-semibold text-slate-900">{selectedRestaurant.name}</span>,
+                },
+                {
+                  label: 'Owner:',
+                  value: <span className="font-semibold text-slate-900">{selectedRestaurant.owner}</span>,
+                },
+                { label: 'City:', value: emailPill(selectedRestaurant.city, true) },
+                { label: 'Status:', value: viewStatusPill(selectedRestaurant.status) },
+                { label: 'Created Date:', value: selectedRestaurant.createdDate },
+              ]
+            : []
+        }
+      />
     </div>
   );
 }

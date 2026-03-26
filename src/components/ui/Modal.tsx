@@ -21,7 +21,7 @@ function Modal({ children, isOpen, title, description, onClose, showCloseButton 
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center bg-black/40 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/40 p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby={title ? titleId : undefined}
@@ -44,7 +44,7 @@ function Modal({ children, isOpen, title, description, onClose, showCloseButton 
           ) : null}
         </div>
         {description ? (
-          <p id={descriptionId} className="mb-3 text-sm text-gray-600">
+          <p id={descriptionId} className="mb-4 text-sm italic text-gray-500">
             {description}
           </p>
         ) : null}

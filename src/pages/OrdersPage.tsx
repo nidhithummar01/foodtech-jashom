@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Inbox } from 'lucide-react';
+import { FcViewDetails } from 'react-icons/fc';
 import Badge from '../components/ui/Badge';
 import Button from '../components/ui/Button';
 import EmptyState from '../components/ui/EmptyState';
 import Input from '../components/ui/Input';
 import Loader from '../components/ui/Loader';
-import Modal from '../components/ui/Modal';
+import ViewDetailsModal, { emailPill, viewStatusPill } from '../components/ui/ViewDetailsModal';
 import Pagination from '../components/ui/Pagination';
 import Select from '../components/ui/Select';
 import Table, { TableCell, TableRow } from '../components/ui/Table';
@@ -136,8 +137,14 @@ function OrdersPage() {
               </TableCell>
               <TableCell>{item.date}</TableCell>
               <TableCell>
-                <Button variant="secondary" size="sm" onClick={() => setSelectedOrder(item)}>
-                  View Details
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="!border-2 !border-emerald-400 px-2 hover:!border-emerald-500 hover:bg-emerald-50"
+                  aria-label="View details"
+                  onClick={() => setSelectedOrder(item)}
+                >
+                  <FcViewDetails className="h-4 w-4 shrink-0" aria-hidden />
                 </Button>
               </TableCell>
             </TableRow>
@@ -154,30 +161,28 @@ function OrdersPage() {
         />
       ) : null}
 
-      <Modal isOpen={Boolean(selectedOrder)} title="Order Details" onClose={() => setSelectedOrder(null)}>
-        {selectedOrder ? (
-          <div className="space-y-2 text-sm text-gray-700">
-            <p>
-              <span className="font-medium text-gray-900">Order ID:</span> {selectedOrder.id}
-            </p>
-            <p>
-              <span className="font-medium text-gray-900">Customer:</span> {selectedOrder.customerName}
-            </p>
-            <p>
-              <span className="font-medium text-gray-900">Restaurant:</span> {selectedOrder.restaurantName}
-            </p>
-            <p>
-              <span className="font-medium text-gray-900">Amount:</span> ₹{selectedOrder.amount.toFixed(2)}
-            </p>
-            <p>
-              <span className="font-medium text-gray-900">Status:</span> {selectedOrder.status}
-            </p>
-            <p>
-              <span className="font-medium text-gray-900">Date:</span> {selectedOrder.date}
-            </p>
-          </div>
-        ) : null}
-      </Modal>
+      <ViewDetailsModal
+        isOpen={Boolean(selectedOrder)}
+        onClose={() => setSelectedOrder(null)}
+        title="Order Details"
+        compact
+        initialsFrom={selectedOrder?.customerName ?? ''}
+        rows={
+          selectedOrder
+            ? [
+                { label: 'Order ID:', value: emailPill(selectedOrder.id, true) },
+                {
+                  label: 'Customer:',
+                  value: <span className="font-semibold text-slate-900">{selectedOrder.customerName}</span>,
+                },
+                { label: 'Restaurant:', value: selectedOrder.restaurantName },
+                { label: 'Amount:', value: `₹${selectedOrder.amount.toFixed(2)}` },
+                { label: 'Status:', value: viewStatusPill(selectedOrder.status) },
+                { label: 'Date:', value: selectedOrder.date },
+              ]
+            : []
+        }
+      />
     </div>
   );
 }

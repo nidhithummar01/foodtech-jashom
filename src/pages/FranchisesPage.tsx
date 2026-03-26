@@ -1,17 +1,22 @@
-import { useEffect, useMemo, useState, type FormEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import { Inbox } from 'lucide-react';
+import { BsThreeDots } from 'react-icons/bs';
+import { CiEdit } from 'react-icons/ci';
 import Badge from '../components/ui/Badge';
 import Button from '../components/ui/Button';
 import EmptyState from '../components/ui/EmptyState';
 import Input from '../components/ui/Input';
 import Loader from '../components/ui/Loader';
 import Modal from '../components/ui/Modal';
+import ViewDetailsModal, { emailPill, viewStatusPill } from '../components/ui/ViewDetailsModal';
 import Pagination from '../components/ui/Pagination';
 import Select from '../components/ui/Select';
 import Table, { TableCell, TableRow } from '../components/ui/Table';
 import { showInfoToast, showSuccessToast } from '../components/ui/toast';
 import { franchisesMock } from '../data/franchises.mock';
 import type { Franchise, FranchiseStatus } from '../types/franchise';
+import { FcApproval, FcViewDetails } from 'react-icons/fc';
+import { MdCancel, MdDelete } from 'react-icons/md';
 
 const PAGE_SIZE = 5;
 
@@ -74,6 +79,15 @@ function FranchisesPage() {
   const [selectedFranchise, setSelectedFranchise] = useState<Franchise | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editTargetId, setEditTargetId] = useState<string | null>(null);
+
+  const MENU_WIDTH = 220;
+  const [actionsMenu, setActionsMenu] = useState<{
+    franchise: Franchise;
+    top: number;
+    left: number;
+  } | null>(null);
+  const actionsMenuRef = useRef<HTMLDivElement | null>(null);
+  const actionsButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const [formFranchiseName, setFormFranchiseName] = useState('');
   const [formOwnerName, setFormOwnerName] = useState('');
@@ -335,6 +349,31 @@ function FranchisesPage() {
 
   const linkedRestaurants = selectedFranchise ? restaurantsByFranchiseId[selectedFranchise.id] ?? [] : [];
 
+  useEffect(() => {
+    if (!actionsMenu) return;
+
+    const onMouseDown = (event: MouseEvent) => {
+      const target = event.target as Node | null;
+      if (!target) return;
+
+      if (actionsMenuRef.current?.contains(target)) return;
+      if (actionsButtonRef.current?.contains(target)) return;
+
+      setActionsMenu(null);
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setActionsMenu(null);
+    };
+
+    document.addEventListener('mousedown', onMouseDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', onMouseDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [actionsMenu]);
+
   return (
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4">
@@ -426,30 +465,130 @@ function FranchisesPage() {
                     </TableCell>
                     <TableCell>{franchise.createdAt}</TableCell>
                     <TableCell>
-                      <div className="flex flex-nowrap items-center gap-2">
-                        <Button variant="secondary" size="sm" onClick={() => handleViewDetails(franchise)}>
-                          View Details
+                      <div className="relative inline-flex">
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          className="!border-2 !border-emerald-400 h-8 w-8 !px-0"
+                          aria-label="Open actions"
+                          onClick={(event) => {
+                            const buttonEl = event.currentTarget;
+                            actionsButtonRef.current = buttonEl;
+
+                            setActionsMenu((prev) => {
+                              if (prev?.franchise.id === franchise.id) return null;
+
+                              const rect = buttonEl.getBoundingClientRect();
+                              const estimatedMenuHeight = franchise.status === 'Pending' ? 220 : 170;
+                              // Keep the menu aligned with the same row section by opening downward.
+                              const topCandidate = rect.bottom + 8;
+                              const top = Math.max(
+                                8,
+                                Math.min(topCandidate, window.innerHeight - estimatedMenuHeight - 8),
+                              );
+
+                              const leftCandidate = rect.right - MENU_WIDTH;
+                              const left = Math.min(
+                                window.innerWidth - MENU_WIDTH - 8,
+                                Math.max(8, leftCandidate),
+                              );
+
+                              return { franchise, top, left };
+                            });
+                          }}
+                        >
+                          <BsThreeDots className="h-5 w-5 text-emerald-900" aria-hidden />
                         </Button>
-                        <Button variant="secondary" size="sm" onClick={() => handleEdit(franchise)}>
-                          Edit
-                        </Button>
-                        {franchise.status === 'Pending' ? (
-                          <>
-                            <Button variant="primary" size="sm" onClick={() => handleApprove(franchise)}>
-                              Approve
-                            </Button>
-                            <Button variant="danger" size="sm" onClick={() => handleReject(franchise)}>
-                              Reject
-                            </Button>
-                            <Button variant="danger" size="sm" onClick={() => handleDelete(franchise)}>
-                              Delete
-                            </Button>
-                          </>
-                        ) : null}
-                        {franchise.status !== 'Pending' ? (
-                          <Button variant="danger" size="sm" onClick={() => handleDelete(franchise)}>
-                            Delete
-                          </Button>
+
+                        {actionsMenu && actionsMenu.franchise.id === franchise.id ? (
+                          <div
+                            ref={actionsMenuRef}
+                            style={{
+                              position: 'fixed',
+                              top: actionsMenu.top,
+                              left: actionsMenu.left,
+                              width: MENU_WIDTH,
+                            }}
+                            className="z-50 rounded-lg border border-emerald-100 bg-white p-2 shadow-lg"
+                          >
+                            <button
+                              type="button"
+                              className="w-full whitespace-nowrap rounded-md px-3 py-1.5 text-left text-sm text-gray-700 hover:bg-emerald-50"
+                              onClick={() => {
+                                handleViewDetails(franchise);
+                                setActionsMenu(null);
+                              }}
+                            >
+                              <span className="inline-flex items-center gap-2">
+                                <FcViewDetails className="h-4 w-4" aria-hidden />
+                                View Details
+                              </span>
+                            </button>
+
+                            <button
+                              type="button"
+                              className="mt-1 w-full whitespace-nowrap rounded-md px-3 py-1.5 text-left text-sm text-gray-700 hover:bg-emerald-50"
+                              onClick={() => {
+                                handleEdit(franchise);
+                                setActionsMenu(null);
+                              }}
+                            >
+                              <span className="inline-flex items-center gap-2">
+                                <CiEdit className="h-4 w-4" aria-hidden />
+                                Edit
+                              </span>
+                            </button>
+
+                            {franchise.status === 'Pending' ? (
+                              <>
+                                <button
+                                  type="button"
+                                  className="mt-1 w-full whitespace-nowrap rounded-md px-3 py-1.5 text-left text-sm text-emerald-800 hover:bg-emerald-50"
+                                  onClick={() => {
+                                    handleApprove(franchise);
+                                    setActionsMenu(null);
+                                  }}
+                                >
+                                  <span className="inline-flex items-center gap-2">
+                                    <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100 text-xs font-semibold text-emerald-700">
+                                      <FcApproval className="h-4 w-4" aria-hidden />
+                                    </span>
+                                    Approve
+                                  </span>
+                                </button>
+
+                                <button
+                                  type="button"
+                                  className="mt-1 w-full whitespace-nowrap rounded-md px-3 py-1.5 text-left text-sm text-red-700 hover:bg-red-50"
+                                  onClick={() => {
+                                    handleReject(franchise);
+                                    setActionsMenu(null);
+                                  }}
+                                >
+                                  <span className="inline-flex items-center gap-2">
+                                    <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-100 text-xs font-semibold text-red-700">
+                                      <MdCancel className="h-4 w-4" aria-hidden />
+                                    </span>
+                                    Reject
+                                  </span>
+                                </button>
+                              </>
+                            ) : null}
+
+                            <button
+                              type="button"
+                              className="mt-1 w-full whitespace-nowrap rounded-md px-3 py-1.5 text-left text-sm text-red-700 hover:bg-red-50"
+                              onClick={() => {
+                                handleDelete(franchise);
+                                setActionsMenu(null);
+                              }}
+                            >
+                              <span className="inline-flex items-center gap-2">
+                                <MdDelete className="h-4 w-4" aria-hidden />
+                                Delete
+                              </span>
+                            </button>
+                          </div>
                         ) : null}
                       </div>
                     </TableCell>
@@ -573,40 +712,36 @@ function FranchisesPage() {
         </form>
       </Modal>
 
-      <Modal isOpen={Boolean(selectedFranchise)} title="Franchise Details" onClose={closeDetailsModal}>
-        {selectedFranchise ? (
-          <div className="space-y-4 text-sm text-gray-700">
-            <div className="space-y-1">
-              <p>
-                <span className="font-medium text-emerald-900">Franchise Name:</span> {selectedFranchise.name}
-              </p>
-              <p>
-                <span className="font-medium text-emerald-900">Owner Info:</span> {selectedFranchise.owner}
-              </p>
-              <p>
-                <span className="font-medium text-emerald-900">Contact Details:</span> {selectedFranchise.email},{' '}
-                {selectedFranchise.phone}
-              </p>
-              <p>
-                <span className="font-medium text-emerald-900">City:</span> {selectedFranchise.city}
-              </p>
-              <div className="flex items-center gap-2">
-                <span className="font-medium text-emerald-900">Status:</span>
-                <Badge variant={statusVariant(selectedFranchise.status)}>{selectedFranchise.status}</Badge>
-              </div>
-              <p>
-                <span className="font-medium text-emerald-900">Total Outlets:</span> {selectedFranchise.outlets}
-              </p>
-              <p>
-                <span className="font-medium text-emerald-900">Revenue:</span> {formatInr(selectedFranchise.revenue)}
-              </p>
-              <p>
-                <span className="font-medium text-emerald-900">Joined Date:</span> {selectedFranchise.agreementStartDate}
-              </p>
-            </div>
-
-            <div className="pt-2">
-              <h3 className="text-sm font-medium text-emerald-900">List of Restaurants under this franchise (mock)</h3>
+      <ViewDetailsModal
+        isOpen={Boolean(selectedFranchise)}
+        onClose={closeDetailsModal}
+        title="Franchise Details"
+        initialsFrom={selectedFranchise?.name ?? ''}
+        rows={
+          selectedFranchise
+            ? [
+                {
+                  label: 'Franchise Name:',
+                  value: <span className="font-semibold text-slate-900">{selectedFranchise.name}</span>,
+                },
+                {
+                  label: 'Owner:',
+                  value: <span className="font-semibold text-slate-900">{selectedFranchise.owner}</span>,
+                },
+                { label: 'Email:', value: emailPill(selectedFranchise.email) },
+                { label: 'Phone:', value: selectedFranchise.phone },
+                { label: 'City:', value: selectedFranchise.city },
+                { label: 'Status:', value: viewStatusPill(selectedFranchise.status) },
+                { label: 'Total Outlets:', value: String(selectedFranchise.outlets) },
+                { label: 'Revenue:', value: formatInr(selectedFranchise.revenue) },
+                { label: 'Joined Date:', value: selectedFranchise.agreementStartDate },
+              ]
+            : []
+        }
+        belowDetails={
+          selectedFranchise ? (
+            <div>
+              <h3 className="text-sm font-semibold text-slate-900">List of Restaurants under this franchise (mock)</h3>
               {linkedRestaurants.length === 0 ? (
                 <p className="mt-2 text-sm text-gray-600">No restaurants linked yet</p>
               ) : (
@@ -623,9 +758,9 @@ function FranchisesPage() {
                 </ul>
               )}
             </div>
-          </div>
-        ) : null}
-      </Modal>
+          ) : undefined
+        }
+      />
     </div>
   );
 }

@@ -1,0 +1,1489 @@
+{
+  "statistics": {
+    "detectionDate": "2026-03-26T06:17:56.860Z",
+    "formats": {
+      "javascript": {
+        "sources": {
+          "src/components/ui/ViewDetailsModal.tsx": {
+            "lines": 83,
+            "tokens": 499,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/toast.example.tsx": {
+            "lines": 6,
+            "tokens": 81,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/Table.tsx": {
+            "lines": 15,
+            "tokens": 178,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/Select.tsx": {
+            "lines": 15,
+            "tokens": 128,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/Pagination.tsx": {
+            "lines": 16,
+            "tokens": 109,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/Modal.tsx": {
+            "lines": 20,
+            "tokens": 154,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/Loader.tsx": {
+            "lines": 9,
+            "tokens": 94,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/Input.tsx": {
+            "lines": 11,
+            "tokens": 70,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/EmptyState.tsx": {
+            "lines": 0,
+            "tokens": 3,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/Button.tsx": {
+            "lines": 8,
+            "tokens": 43,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/Badge.tsx": {
+            "lines": 4,
+            "tokens": 16,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/layout/Topbar.tsx": {
+            "lines": 0,
+            "tokens": 18,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/layout/Sidebar.tsx": {
+            "lines": 58,
+            "tokens": 418,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/routes/AppRoutes.tsx": {
+            "lines": 7,
+            "tokens": 161,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/UsersPage.tsx": {
+            "lines": 188,
+            "tokens": 1509,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/SettingsPage.tsx": {
+            "lines": 248,
+            "tokens": 1966,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/RestaurantsPage.tsx": {
+            "lines": 66,
+            "tokens": 513,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 32,
+            "duplicatedTokens": 236,
+            "percentage": 48.48,
+            "percentageTokens": 46,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/ReportsPage.tsx": {
+            "lines": 112,
+            "tokens": 967,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/OrdersPage.tsx": {
+            "lines": 80,
+            "tokens": 661,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 29,
+            "duplicatedTokens": 234,
+            "percentage": 36.25,
+            "percentageTokens": 35.4,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/FranchisesPage.tsx": {
+            "lines": 274,
+            "tokens": 2247,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 31,
+            "duplicatedTokens": 238,
+            "percentage": 11.31,
+            "percentageTokens": 10.59,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/DashboardPage.tsx": {
+            "lines": 45,
+            "tokens": 417,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 1265,
+          "tokens": 10252,
+          "sources": 21,
+          "clones": 3,
+          "duplicatedLines": 46,
+          "duplicatedTokens": 354,
+          "percentage": 3.64,
+          "percentageTokens": 3.45,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      },
+      "tsx": {
+        "sources": {
+          "src/components/ui/ViewDetailsModal.tsx": {
+            "lines": 157,
+            "tokens": 1067,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/toast.example.tsx": {
+            "lines": 19,
+            "tokens": 175,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/Table.tsx": {
+            "lines": 48,
+            "tokens": 403,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/Select.tsx": {
+            "lines": 46,
+            "tokens": 382,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 9,
+            "duplicatedTokens": 74,
+            "percentage": 19.57,
+            "percentageTokens": 19.37,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/Pagination.tsx": {
+            "lines": 36,
+            "tokens": 245,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/Modal.tsx": {
+            "lines": 56,
+            "tokens": 423,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/Loader.tsx": {
+            "lines": 31,
+            "tokens": 272,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/Input.tsx": {
+            "lines": 33,
+            "tokens": 259,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 9,
+            "duplicatedTokens": 74,
+            "percentage": 27.27,
+            "percentageTokens": 28.57,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/EmptyState.tsx": {
+            "lines": 28,
+            "tokens": 276,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/Button.tsx": {
+            "lines": 54,
+            "tokens": 357,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/ui/Badge.tsx": {
+            "lines": 30,
+            "tokens": 205,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/layout/Topbar.tsx": {
+            "lines": 57,
+            "tokens": 446,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/components/layout/Sidebar.tsx": {
+            "lines": 93,
+            "tokens": 710,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/routes/AppRoutes.tsx": {
+            "lines": 24,
+            "tokens": 294,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/UsersPage.tsx": {
+            "lines": 397,
+            "tokens": 3623,
+            "sources": 1,
+            "clones": 6,
+            "duplicatedLines": 64,
+            "duplicatedTokens": 473,
+            "percentage": 16.12,
+            "percentageTokens": 13.06,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/SettingsPage.tsx": {
+            "lines": 364,
+            "tokens": 2954,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 11,
+            "duplicatedTokens": 65,
+            "percentage": 3.02,
+            "percentageTokens": 2.2,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/RestaurantsPage.tsx": {
+            "lines": 177,
+            "tokens": 1627,
+            "sources": 1,
+            "clones": 7,
+            "duplicatedLines": 66,
+            "duplicatedTokens": 534,
+            "percentage": 37.29,
+            "percentageTokens": 32.82,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/ReportsPage.tsx": {
+            "lines": 242,
+            "tokens": 2173,
+            "sources": 1,
+            "clones": 4,
+            "duplicatedLines": 23,
+            "duplicatedTokens": 197,
+            "percentage": 9.5,
+            "percentageTokens": 9.07,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/OrdersPage.tsx": {
+            "lines": 189,
+            "tokens": 1852,
+            "sources": 1,
+            "clones": 4,
+            "duplicatedLines": 45,
+            "duplicatedTokens": 344,
+            "percentage": 23.81,
+            "percentageTokens": 18.57,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/FranchisesPage.tsx": {
+            "lines": 636,
+            "tokens": 5852,
+            "sources": 1,
+            "clones": 9,
+            "duplicatedLines": 82,
+            "duplicatedTokens": 648,
+            "percentage": 12.89,
+            "percentageTokens": 11.07,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/pages/DashboardPage.tsx": {
+            "lines": 122,
+            "tokens": 1131,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 7,
+            "duplicatedTokens": 55,
+            "percentage": 5.74,
+            "percentageTokens": 4.86,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/main.tsx": {
+            "lines": 14,
+            "tokens": 118,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/App.tsx": {
+            "lines": 18,
+            "tokens": 119,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 2871,
+          "tokens": 24963,
+          "sources": 23,
+          "clones": 17,
+          "duplicatedLines": 158,
+          "duplicatedTokens": 1232,
+          "percentage": 5.5,
+          "percentageTokens": 4.94,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      },
+      "typescript": {
+        "sources": {
+          "src/components/ui/toast.ts": {
+            "lines": 23,
+            "tokens": 187,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/types/user.ts": {
+            "lines": 5,
+            "tokens": 39,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/types/restaurant.ts": {
+            "lines": 5,
+            "tokens": 39,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/types/report.ts": {
+            "lines": 6,
+            "tokens": 62,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/types/order.ts": {
+            "lines": 5,
+            "tokens": 39,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/types/franchise.ts": {
+            "lines": 15,
+            "tokens": 116,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/data/users.mock.ts": {
+            "lines": 17,
+            "tokens": 110,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/data/restaurants.mock.ts": {
+            "lines": 25,
+            "tokens": 159,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/data/reports.mock.ts": {
+            "lines": 24,
+            "tokens": 158,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/data/orders.mock.ts": {
+            "lines": 21,
+            "tokens": 137,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/data/franchises.mock.ts": {
+            "lines": 43,
+            "tokens": 291,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "src/data/dashboard.mock.ts": {
+            "lines": 5,
+            "tokens": 39,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 194,
+          "tokens": 1376,
+          "sources": 12,
+          "clones": 0,
+          "duplicatedLines": 0,
+          "duplicatedTokens": 0,
+          "percentage": 0,
+          "percentageTokens": 0,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      },
+      "css": {
+        "sources": {
+          "src/index.css": {
+            "lines": 2,
+            "tokens": 10,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 2,
+          "tokens": 10,
+          "sources": 1,
+          "clones": 0,
+          "duplicatedLines": 0,
+          "duplicatedTokens": 0,
+          "percentage": 0,
+          "percentageTokens": 0,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      }
+    },
+    "total": {
+      "lines": 4332,
+      "tokens": 36601,
+      "sources": 57,
+      "clones": 20,
+      "duplicatedLines": 204,
+      "duplicatedTokens": 1586,
+      "percentage": 4.71,
+      "percentageTokens": 4.33,
+      "newDuplicatedLines": 0,
+      "newClones": 0
+    }
+  },
+  "duplicates": [
+    {
+      "format": "tsx",
+      "lines": 10,
+      "fragment": "= id ?? props.name;\n\n  return (\n    <div className=\"w-full space-y-1.5\">\n      {label ? (\n        <label htmlFor={inputId} className=\"text-sm font-medium text-gray-700\">\n          {label}\n        </label>\n      ) : null}\n      <input",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\components\\ui\\Input.tsx",
+        "start": 10,
+        "end": 19,
+        "startLoc": {
+          "line": 10,
+          "column": 2,
+          "position": 94
+        },
+        "endLoc": {
+          "line": 19,
+          "column": 6,
+          "position": 168
+        }
+      },
+      "secondFile": {
+        "name": "src\\components\\ui\\Select.tsx",
+        "start": 17,
+        "end": 26,
+        "startLoc": {
+          "line": 17,
+          "column": 2,
+          "position": 143
+        },
+        "endLoc": {
+          "line": 26,
+          "column": 7,
+          "position": 217
+        }
+      }
+    },
+    {
+      "format": "tsx",
+      "lines": 12,
+      "fragment": "\" onClick={closeEditProfileModal}>\n              Cancel\n            </Button>\n            <Button type=\"submit\">Save Changes</Button>\n          </div>\n        </form>\n      </Modal>\n    </div>\n  );\n}\n\nexport default SettingsPage",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\SettingsPage.tsx",
+        "start": 354,
+        "end": 365,
+        "startLoc": {
+          "line": 354,
+          "column": 10,
+          "position": 2888
+        },
+        "endLoc": {
+          "line": 365,
+          "column": 13,
+          "position": 2953
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\UsersPage.tsx",
+        "start": 387,
+        "end": 398,
+        "startLoc": {
+          "line": 387,
+          "column": 7,
+          "position": 3557
+        },
+        "endLoc": {
+          "line": 398,
+          "column": 10,
+          "position": 3622
+        }
+      }
+    },
+    {
+      "format": "tsx",
+      "lines": 8,
+      "fragment": ");\n      setLoading(false);\n    }, Math.floor(Math.random() * 401) + 800);\n\n    return () => window.clearTimeout(timeout);\n  }, []);\n\n  const filteredRestaurants",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\RestaurantsPage.tsx",
+        "start": 49,
+        "end": 56,
+        "startLoc": {
+          "line": 49,
+          "column": 15,
+          "position": 547
+        },
+        "endLoc": {
+          "line": 56,
+          "column": 20,
+          "position": 612
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\UsersPage.tsx",
+        "start": 62,
+        "end": 69,
+        "startLoc": {
+          "line": 62,
+          "column": 16,
+          "position": 782
+        },
+        "endLoc": {
+          "line": 69,
+          "column": 12,
+          "position": 847
+        }
+      }
+    },
+    {
+      "format": "tsx",
+      "lines": 9,
+      "fragment": "</h1>\n        <Loader variant=\"skeleton\" lines={6} />\n      </div>\n    );\n  }\n\n  return (\n    <div className=\"space-y-6\">\n      <h1 className=\"text-2xl font-semibold tracking-tight text-emerald-900",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\ReportsPage.tsx",
+        "start": 115,
+        "end": 123,
+        "startLoc": {
+          "line": 115,
+          "column": 8,
+          "position": 1105
+        },
+        "endLoc": {
+          "line": 123,
+          "column": 55,
+          "position": 1163
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\RestaurantsPage.tsx",
+        "start": 73,
+        "end": 81,
+        "startLoc": {
+          "line": 73,
+          "column": 12,
+          "position": 813
+        },
+        "endLoc": {
+          "line": 81,
+          "column": 40,
+          "position": 871
+        }
+      }
+    },
+    {
+      "format": "tsx",
+      "lines": 5,
+      "fragment": "</h2>\n          <div className=\"mt-3 h-40 rounded-lg border border-dashed bg-gray-50\" />\n        </div>\n        <div className=\"rounded-lg border border-emerald-100 bg-white p-4 shadow-sm\">\n          <h2 className=\"text-sm font-medium text-emerald-900\">Top",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\ReportsPage.tsx",
+        "start": 197,
+        "end": 201,
+        "startLoc": {
+          "line": 197,
+          "column": 10,
+          "position": 1736
+        },
+        "endLoc": {
+          "line": 201,
+          "column": 4,
+          "position": 1778
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\ReportsPage.tsx",
+        "start": 186,
+        "end": 190,
+        "startLoc": {
+          "line": 186,
+          "column": 6,
+          "position": 1627
+        },
+        "endLoc": {
+          "line": 190,
+          "column": 8,
+          "position": 1669
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 16,
+      "fragment": "} />;\n  }\n\n  return (\n    <div className=\"space-y-6\">\n      <h1 className=\"text-2xl font-semibold text-emerald-900\">Orders</h1>\n\n      <div className=\"grid grid-cols-1 gap-3 md:grid-cols-2\">\n        <Select\n          label=\"Status\"\n          name=\"orderStatus\"\n          value={statusFilter}\n          onChange={(event) => setStatusFilter(event.target.value)}\n          options={[\n            { label: 'All Status', value: '' },\n            { label: 'Pending'",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\OrdersPage.tsx",
+        "start": 80,
+        "end": 95,
+        "startLoc": {
+          "line": 80,
+          "column": 2,
+          "position": 933
+        },
+        "endLoc": {
+          "line": 95,
+          "column": 10,
+          "position": 1049
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\RestaurantsPage.tsx",
+        "start": 89,
+        "end": 98,
+        "startLoc": {
+          "line": 89,
+          "column": 2,
+          "position": 936
+        },
+        "endLoc": {
+          "line": 98,
+          "column": 9,
+          "position": 1004
+        }
+      }
+    },
+    {
+      "format": "tsx",
+      "lines": 10,
+      "fragment": "import { useEffect, useMemo, useState } from 'react';\nimport { Inbox } from 'lucide-react';\nimport { FcViewDetails } from 'react-icons/fc';\nimport Badge from '../components/ui/Badge';\nimport Button from '../components/ui/Button';\nimport EmptyState from '../components/ui/EmptyState';\nimport Input from '../components/ui/Input';\nimport Loader from '../components/ui/Loader';\nimport ViewDetailsModal, { emailPill, viewStatusPill } from '../components/ui/ViewDetailsModal';\nimport Pagination",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\OrdersPage.tsx",
+        "start": 1,
+        "end": 10,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 10,
+          "column": 11,
+          "position": 111
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\RestaurantsPage.tsx",
+        "start": 1,
+        "end": 10,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 10,
+          "column": 7,
+          "position": 111
+        }
+      }
+    },
+    {
+      "format": "tsx",
+      "lines": 15,
+      "fragment": "}</TableCell>\n              <TableCell>\n                <Badge\n                  variant={\n                    item.status === 'Completed'\n                      ? 'success'\n                      : item.status === 'Pending'\n                        ? 'warning'\n                        : 'danger'\n                  }\n                >\n                  {item.status}\n                </Badge>\n              </TableCell>\n              <TableCell>{item.date",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\OrdersPage.tsx",
+        "start": 124,
+        "end": 138,
+        "startLoc": {
+          "line": 124,
+          "column": 2,
+          "position": 1334
+        },
+        "endLoc": {
+          "line": 138,
+          "column": 5,
+          "position": 1406
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\RestaurantsPage.tsx",
+        "start": 119,
+        "end": 133,
+        "startLoc": {
+          "line": 119,
+          "column": 5,
+          "position": 1218
+        },
+        "endLoc": {
+          "line": 133,
+          "column": 12,
+          "position": 1290
+        }
+      }
+    },
+    {
+      "format": "tsx",
+      "lines": 18,
+      "fragment": "}</TableCell>\n              <TableCell>\n                <Button\n                  variant=\"secondary\"\n                  size=\"sm\"\n                  className=\"!border-2 !border-emerald-400 px-2 hover:!border-emerald-500 hover:bg-emerald-50\"\n                  aria-label=\"View details\"\n                  onClick={() => setSelectedOrder(item)}\n                >\n                  <FcViewDetails className=\"h-4 w-4 shrink-0\" aria-hidden />\n                </Button>\n              </TableCell>\n            </TableRow>\n          ))}\n        </Table>\n      )}\n\n      {",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\OrdersPage.tsx",
+        "start": 138,
+        "end": 155,
+        "startLoc": {
+          "line": 138,
+          "column": 5,
+          "position": 1407
+        },
+        "endLoc": {
+          "line": 155,
+          "column": 2,
+          "position": 1506
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\RestaurantsPage.tsx",
+        "start": 133,
+        "end": 150,
+        "startLoc": {
+          "line": 133,
+          "column": 12,
+          "position": 1291
+        },
+        "endLoc": {
+          "line": 150,
+          "column": 2,
+          "position": 1390
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 18,
+      "fragment": "} />\n      ) : (\n        <>\n          <div className=\"grid grid-cols-1 gap-3 md:grid-cols-3\">\n            <Input\n              label=\"Search\"\n              name=\"franchiseSearch\"\n              placeholder=\"Search by franchise name or owner\"\n              value={search}\n              onChange={(event) => setSearch(event.target.value)}\n            />\n            <Select\n              label=\"Status\"\n              name=\"franchiseStatus\"\n              value={statusFilter}\n              onChange={(event) => setStatusFilter(event.target.value)}\n              options={[\n                ",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\FranchisesPage.tsx",
+        "start": 357,
+        "end": 374,
+        "startLoc": {
+          "line": 357,
+          "column": 2,
+          "position": 3594
+        },
+        "endLoc": {
+          "line": 374,
+          "column": 17,
+          "position": 3714
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\RestaurantsPage.tsx",
+        "start": 74,
+        "end": 97,
+        "startLoc": {
+          "line": 74,
+          "column": 2,
+          "position": 831
+        },
+        "endLoc": {
+          "line": 97,
+          "column": 13,
+          "position": 985
+        }
+      }
+    },
+    {
+      "format": "javascript",
+      "lines": 15,
+      "fragment": ")}>\n                            Delete\n                          </Button>\n                        ) : null}\n                      </div>\n                    </TableCell>\n                  </TableRow>\n                ))}\n              </Table>\n\n              <Pagination\n                currentPage={currentPage}\n                totalPages={totalPages}\n                onPrevious={() => setCurrentPage((prev) => Math.max(1, prev - 1))}\n                onNext={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\FranchisesPage.tsx",
+        "start": 458,
+        "end": 472,
+        "startLoc": {
+          "line": 458,
+          "column": 10,
+          "position": 4438
+        },
+        "endLoc": {
+          "line": 472,
+          "column": 2,
+          "position": 4556
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\OrdersPage.tsx",
+        "start": 145,
+        "end": 160,
+        "startLoc": {
+          "line": 145,
+          "column": 5,
+          "position": 1456
+        },
+        "endLoc": {
+          "line": 160,
+          "column": 2,
+          "position": 1591
+        }
+      }
+    },
+    {
+      "format": "tsx",
+      "lines": 9,
+      "fragment": "} from 'react';\nimport { Inbox } from 'lucide-react';\nimport { FcViewDetails } from 'react-icons/fc';\nimport Badge from '../components/ui/Badge';\nimport Button from '../components/ui/Button';\nimport EmptyState from '../components/ui/EmptyState';\nimport Input from '../components/ui/Input';\nimport Loader from '../components/ui/Loader';\nimport Modal",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\FranchisesPage.tsx",
+        "start": 1,
+        "end": 9,
+        "startLoc": {
+          "line": 1,
+          "column": 2,
+          "position": 17
+        },
+        "endLoc": {
+          "line": 9,
+          "column": 6,
+          "position": 97
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\RestaurantsPage.tsx",
+        "start": 1,
+        "end": 9,
+        "startLoc": {
+          "line": 1,
+          "column": 2,
+          "position": 12
+        },
+        "endLoc": {
+          "line": 9,
+          "column": 17,
+          "position": 92
+        }
+      }
+    },
+    {
+      "format": "tsx",
+      "lines": 6,
+      "fragment": ";\nimport ViewDetailsModal, { emailPill, viewStatusPill } from '../components/ui/ViewDetailsModal';\nimport Pagination from '../components/ui/Pagination';\nimport Select from '../components/ui/Select';\nimport Table, { TableCell, TableRow } from '../components/ui/Table';\nimport { showInfoToast",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\FranchisesPage.tsx",
+        "start": 9,
+        "end": 14,
+        "startLoc": {
+          "line": 9,
+          "column": 25,
+          "position": 102
+        },
+        "endLoc": {
+          "line": 14,
+          "column": 14,
+          "position": 164
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\OrdersPage.tsx",
+        "start": 8,
+        "end": 13,
+        "startLoc": {
+          "line": 8,
+          "column": 26,
+          "position": 88
+        },
+        "endLoc": {
+          "line": 13,
+          "column": 11,
+          "position": 150
+        }
+      }
+    },
+    {
+      "format": "tsx",
+      "lines": 4,
+      "fragment": "[]>([]);\n  const [search, setSearch] = useState('');\n  const [statusFilter, setStatusFilter] = useState('');\n  const [cityFilter",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\FranchisesPage.tsx",
+        "start": 70,
+        "end": 73,
+        "startLoc": {
+          "line": 70,
+          "column": 10,
+          "position": 688
+        },
+        "endLoc": {
+          "line": 73,
+          "column": 11,
+          "position": 737
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\RestaurantsPage.tsx",
+        "start": 30,
+        "end": 33,
+        "startLoc": {
+          "line": 30,
+          "column": 14,
+          "position": 294
+        },
+        "endLoc": {
+          "line": 33,
+          "column": 19,
+          "position": 343
+        }
+      }
+    },
+    {
+      "format": "tsx",
+      "lines": 8,
+      "fragment": ");\n      setLoading(false);\n    }, Math.floor(Math.random() * 401) + 800);\n\n    return () => window.clearTimeout(timeout);\n  }, []);\n\n  const cityOptions",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\FranchisesPage.tsx",
+        "start": 101,
+        "end": 108,
+        "startLoc": {
+          "line": 101,
+          "column": 15,
+          "position": 1188
+        },
+        "endLoc": {
+          "line": 108,
+          "column": 12,
+          "position": 1253
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\UsersPage.tsx",
+        "start": 62,
+        "end": 69,
+        "startLoc": {
+          "line": 62,
+          "column": 16,
+          "position": 782
+        },
+        "endLoc": {
+          "line": 69,
+          "column": 12,
+          "position": 847
+        }
+      }
+    },
+    {
+      "format": "tsx",
+      "lines": 11,
+      "fragment": ");\n\n    setFranchiseNameError('');\n    setOwnerNameError('');\n    setEmailError('');\n    setPhoneError('');\n    setCityError('');\n    setOutletsError('');\n    setAgreementStartDateError('');\n\n    setIsEditMode(true",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\FranchisesPage.tsx",
+        "start": 160,
+        "end": 170,
+        "startLoc": {
+          "line": 160,
+          "column": 7,
+          "position": 1752
+        },
+        "endLoc": {
+          "line": 170,
+          "column": 5,
+          "position": 1809
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\FranchisesPage.tsx",
+        "start": 126,
+        "end": 136,
+        "startLoc": {
+          "line": 126,
+          "column": 10,
+          "position": 1496
+        },
+        "endLoc": {
+          "line": 136,
+          "column": 6,
+          "position": 1553
+        }
+      }
+    },
+    {
+      "format": "tsx",
+      "lines": 14,
+      "fragment": "('');\n    }\n\n    if (nextEmail.length === 0) {\n      setEmailError('Email is required');\n      valid = false;\n    } else if (!isValidEmail(nextEmail)) {\n      setEmailError('Email format is invalid');\n      valid = false;\n    } else {\n      setEmailError('');\n    }\n\n    if (nextPhoneDigits",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\FranchisesPage.tsx",
+        "start": 202,
+        "end": 215,
+        "startLoc": {
+          "line": 202,
+          "column": 18,
+          "position": 2110
+        },
+        "endLoc": {
+          "line": 215,
+          "column": 16,
+          "position": 2203
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\UsersPage.tsx",
+        "start": 139,
+        "end": 152,
+        "startLoc": {
+          "line": 139,
+          "column": 13,
+          "position": 1586
+        },
+        "endLoc": {
+          "line": 152,
+          "column": 9,
+          "position": 1679
+        }
+      }
+    },
+    {
+      "format": "tsx",
+      "lines": 10,
+      "fragment": ">\n\n      {loading ? (\n        <Loader variant=\"skeleton\" lines={8} />\n      ) : (\n        <>\n          <div className=\"grid grid-cols-1 gap-3 md:grid-cols-3\">\n            <Input\n              label=\"Search\"\n              name=\"franchiseSearch",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\FranchisesPage.tsx",
+        "start": 354,
+        "end": 363,
+        "startLoc": {
+          "line": 354,
+          "column": 4,
+          "position": 3569
+        },
+        "endLoc": {
+          "line": 363,
+          "column": 16,
+          "position": 3633
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\UsersPage.tsx",
+        "start": 196,
+        "end": 205,
+        "startLoc": {
+          "line": 196,
+          "column": 3,
+          "position": 2032
+        },
+        "endLoc": {
+          "line": 205,
+          "column": 7,
+          "position": 2096
+        }
+      }
+    },
+    {
+      "format": "tsx",
+      "lines": 18,
+      "fragment": "</div>\n                    </TableCell>\n                  </TableRow>\n                ))}\n              </Table>\n\n              <Pagination\n                currentPage={currentPage}\n                totalPages={totalPages}\n                onPrevious={() => setCurrentPage((prev) => Math.max(1, prev - 1))}\n                onNext={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}\n              />\n            </>\n          )}\n        </>\n      )}\n\n      <",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\FranchisesPage.tsx",
+        "start": 462,
+        "end": 479,
+        "startLoc": {
+          "line": 462,
+          "column": 23,
+          "position": 4459
+        },
+        "endLoc": {
+          "line": 479,
+          "column": 2,
+          "position": 4580
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\UsersPage.tsx",
+        "start": 263,
+        "end": 280,
+        "startLoc": {
+          "line": 263,
+          "column": 23,
+          "position": 2623
+        },
+        "endLoc": {
+          "line": 280,
+          "column": 2,
+          "position": 2744
+        }
+      }
+    },
+    {
+      "format": "tsx",
+      "lines": 8,
+      "fragment": ".value}</p>\n          </div>\n        ))}\n      </section>\n\n      <section className=\"grid grid-cols-1 gap-4 lg:grid-cols-2\">\n        <div className=\"rounded-lg border border-emerald-100 bg-white p-4 shadow-sm\">\n          <h2 className=\"text-sm font-medium text-emerald-900\">Orders",
+      "tokens": 0,
+      "firstFile": {
+        "name": "src\\pages\\DashboardPage.tsx",
+        "start": 77,
+        "end": 84,
+        "startLoc": {
+          "line": 77,
+          "column": 5,
+          "position": 735
+        },
+        "endLoc": {
+          "line": 84,
+          "column": 7,
+          "position": 790
+        }
+      },
+      "secondFile": {
+        "name": "src\\pages\\ReportsPage.tsx",
+        "start": 179,
+        "end": 186,
+        "startLoc": {
+          "line": 179,
+          "column": 5,
+          "position": 1569
+        },
+        "endLoc": {
+          "line": 186,
+          "column": 12,
+          "position": 1624
+        }
+      }
+    }
+  ]
+}

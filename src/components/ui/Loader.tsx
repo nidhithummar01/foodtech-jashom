@@ -4,9 +4,12 @@ type LoaderProps = {
   variant?: 'spinner' | 'skeleton';
   lines?: number;
   className?: string;
+  hideText?: boolean;
+  spinnerClassName?: string;
+  textClassName?: string;
 };
 
-function Loader({ variant = 'spinner', lines = 3, className }: LoaderProps) {
+function Loader({ variant = 'spinner', lines = 3, className, hideText = false, spinnerClassName, textClassName }: LoaderProps) {
   if (variant === 'skeleton') {
     return (
       <div className={clsx('space-y-2', className)}>
@@ -20,11 +23,14 @@ function Loader({ variant = 'spinner', lines = 3, className }: LoaderProps) {
   return (
     <div className={clsx('flex items-center gap-2 text-sm text-gray-600', className)} role="status" aria-live="polite">
       <span
-        className="h-4 w-4 animate-spin rounded-full border-2 border-gray-300 border-t-gray-700 motion-reduce:animate-none"
+        className={clsx(
+          'h-4 w-4 animate-spin rounded-full border-2 border-gray-300 border-t-gray-700 motion-reduce:animate-none',
+          spinnerClassName,
+        )}
         aria-hidden="true"
       />
-      <span className="sr-only">Loading</span>
-      <span>Loading...</span>
+      <span className={hideText ? 'sr-only' : undefined}>Loading</span>
+      {hideText ? null : <span className={textClassName}>Loading...</span>}
     </div>
   );
 }

@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { Inbox } from 'lucide-react';
+import { FcViewDetails } from 'react-icons/fc';
+import { CiEdit } from 'react-icons/ci';
+import { MdDisabledByDefault } from 'react-icons/md';
 import Modal from '../components/ui/Modal';
+import ViewDetailsModal, { emailPill, viewStatusPill } from '../components/ui/ViewDetailsModal';
 import Badge from '../components/ui/Badge';
 import Button from '../components/ui/Button';
 import EmptyState from '../components/ui/EmptyState';
@@ -243,13 +247,31 @@ function UsersPage() {
                     <TableCell>{user.createdDate}</TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
-                        <Button variant="secondary" size="sm" onClick={() => setSelectedViewUser(user)}>
-                          View
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          className="h-7 w-7 min-w-0 shrink-0 !border-2 !border-emerald-400 p-0 hover:!border-emerald-500 hover:bg-emerald-50"
+                          aria-label="View user"
+                          onClick={() => setSelectedViewUser(user)}
+                        >
+                          <FcViewDetails className="h-3.5 w-3.5 shrink-0" aria-hidden />
                         </Button>
-                        <Button variant="secondary" size="sm" onClick={() => openEditUserModal(user)}>
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          className="gap-1.5"
+                          onClick={() => openEditUserModal(user)}
+                        >
+                          <CiEdit className="h-4 w-4 shrink-0" aria-hidden />
                           Edit
                         </Button>
-                        <Button variant="danger" size="sm" onClick={() => setSelectedDisableUser(user)}>
+                        <Button
+                          variant="danger"
+                          size="sm"
+                          className="gap-1.5"
+                          onClick={() => setSelectedDisableUser(user)}
+                        >
+                          <MdDisabledByDefault className="h-4 w-4 shrink-0" aria-hidden />
                           Disable
                         </Button>
                       </div>
@@ -269,39 +291,34 @@ function UsersPage() {
         </>
       )}
 
-      <Modal
+      <ViewDetailsModal
         isOpen={Boolean(selectedViewUser)}
-        title="View"
         onClose={() => setSelectedViewUser(null)}
-        showCloseButton={false}
-      >
-        {selectedViewUser ? (
-          <div className="space-y-2 text-sm text-gray-700">
-            <p>View action (demo mode)</p>
-            <p>
-              <span className="font-medium text-gray-900">Name:</span> {selectedViewUser.name}
-            </p>
-            <p>
-              <span className="font-medium text-gray-900">Email:</span> {selectedViewUser.email}
-            </p>
-            <p>
-              <span className="font-medium text-gray-900">Role:</span> {selectedViewUser.role}
-            </p>
-            <p>
-              <span className="font-medium text-gray-900">Status:</span> {selectedViewUser.status}
-            </p>
-            <p>
-              <span className="font-medium text-gray-900">Created Date:</span> {selectedViewUser.createdDate}
-            </p>
-          </div>
-        ) : null}
-
-        <div className="mt-4 flex justify-end">
-          <Button variant="secondary" onClick={() => setSelectedViewUser(null)}>
-            OK
-          </Button>
-        </div>
-      </Modal>
+        title="View Profile"
+        compact
+        initialsFrom={selectedViewUser?.name ?? ''}
+        rows={
+          selectedViewUser
+            ? [
+                {
+                  label: 'Name:',
+                  value: (
+                    <span className="font-semibold text-slate-900">{selectedViewUser.name}</span>
+                  ),
+                },
+                { label: 'Email:', value: emailPill(selectedViewUser.email, true) },
+                {
+                  label: 'Role:',
+                  value: (
+                    <span className="font-semibold text-slate-900">{selectedViewUser.role}</span>
+                  ),
+                },
+                { label: 'Status:', value: viewStatusPill(selectedViewUser.status) },
+                { label: 'Created Date:', value: selectedViewUser.createdDate },
+              ]
+            : []
+        }
+      />
 
       <Modal
         isOpen={Boolean(selectedDisableUser)}
@@ -323,7 +340,10 @@ function UsersPage() {
             Cancel
           </Button>
           <Button variant="danger" onClick={handleConfirmDisable}>
-            Disable
+            <span className="inline-flex items-center gap-1.5">
+              <MdDisabledByDefault className="h-4 w-4 shrink-0" aria-hidden />
+              Disable
+            </span>
           </Button>
         </div>
       </Modal>
