@@ -55,8 +55,6 @@ function DashboardPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-semibold text-emerald-900">Dashboard</h1>
-
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           {[1, 2, 3, 4].map((i) => (
             <div key={i} className="h-24 bg-gray-300 rounded-lg animate-pulse" />
@@ -68,8 +66,6 @@ function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold text-emerald-900">Dashboard</h1>
-
       <section className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
         {kpis.map((item) => (
           <div key={item.label} className="rounded-lg border border-emerald-100 bg-white p-4 shadow-sm">

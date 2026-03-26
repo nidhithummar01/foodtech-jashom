@@ -82,8 +82,6 @@ function OrdersPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold text-emerald-900">Orders</h1>
-
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         <Select
           label="Status"

@@ -378,7 +378,6 @@ function FranchisesPage() {
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-emerald-900">Franchises</h1>
           <p className="mt-1 text-sm text-gray-600">
             Manage franchise partners who own or operate multiple restaurants under your brand.
           </p>

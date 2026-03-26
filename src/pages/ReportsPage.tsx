@@ -112,7 +112,6 @@ function ReportsPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-semibold tracking-tight text-emerald-900">Reports</h1>
         <Loader variant="skeleton" lines={6} />
       </div>
     );
@@ -120,8 +119,6 @@ function ReportsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold tracking-tight text-emerald-900">Reports</h1>
-
       <section className="rounded-xl border border-emerald-100 bg-white p-4 shadow-sm">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Select

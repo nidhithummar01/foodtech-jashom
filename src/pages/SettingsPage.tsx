@@ -102,8 +102,6 @@ function SettingsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold tracking-tight text-emerald-900">Settings</h1>
-
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
         {/* Profile Settings */}
         <section className="flex flex-col rounded-2xl border border-emerald-100 bg-white p-5 shadow-sm">
