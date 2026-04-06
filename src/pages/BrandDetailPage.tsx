@@ -1,12 +1,58 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Star, MapPin } from 'lucide-react';
+import { FaGoogle } from 'react-icons/fa';
+import { SiSwiggy, SiZomato } from 'react-icons/si';
 import { brandsMock } from '../data/brands.mock';
+
+function PlatformIcon({
+  platform,
+  className,
+}: {
+  platform: 'zomato' | 'swiggy' | 'google';
+  className?: string;
+}) {
+  const cn = className ?? 'h-5 w-5';
+  switch (platform) {
+    case 'zomato':
+      return <SiZomato className={cn} aria-hidden />;
+    case 'swiggy':
+      return <SiSwiggy className={cn} aria-hidden />;
+    case 'google':
+      return <FaGoogle className={cn} aria-hidden />;
+  }
+}
+
+function PlatformIconByName({ name, className }: { name: string; className?: string }) {
+  const n = name.toLowerCase();
+  if (n === 'zomato') return <SiZomato className={className} aria-hidden />;
+  if (n === 'swiggy') return <SiSwiggy className={className} aria-hidden />;
+  if (n === 'google') return <FaGoogle className={className} aria-hidden />;
+  return null;
+}
 
 type AuraItem = { label: string; score: number; color: string };
 type UpdateItem = { id: string; timeAgo: string; title: string; desc: string; type: string; icon: string };
 type ReviewItem = { id: string; author: string; rating: number; date: string; text: string };
-type LocationReview = { id: string; city: string; area: string; zomato: number; swiggy: number; google: number };
+type LocationPlatform = 'zomato' | 'swiggy' | 'google';
+type LocationDetailReview = {
+  id: string;
+  platform: LocationPlatform;
+  author: string;
+  rating: number;
+  date: string;
+  text: string;
+};
+type LocationReview = {
+  id: string;
+  city: string;
+  area: string;
+  zomato: number;
+  swiggy: number;
+  google: number;
+  /** Per-location reviews; omit or empty = show “no reviews” state */
+  reviews?: LocationDetailReview[];
+};
 type ReviewSummary = {
   totalReviews: number; avgRating: number;
   ratingBreakdown: { star: number; count: number }[];
@@ -467,7 +513,18 @@ function ReviewsTab({ brand }: { brand: BrandDetail }) {
           <div className="mt-5 grid grid-cols-3 gap-3">
             {s.platforms.map((p) => (
               <div key={p.name} className="rounded-lg border border-gray-100 bg-gray-50 p-3 text-center">
-                <span className="text-xl">{p.icon}</span>
+                <div className="flex justify-center text-xl">
+                  <PlatformIconByName
+                    name={p.name}
+                    className={`h-6 w-6 ${
+                      p.name.toLowerCase() === 'zomato'
+                        ? 'text-[#E23744]'
+                        : p.name.toLowerCase() === 'swiggy'
+                          ? 'text-[#FC8019]'
+                          : 'text-blue-600'
+                    }`}
+                  />
+                </div>
                 <p className="mt-1 text-[11px] font-medium uppercase tracking-wide text-gray-400">{p.name}</p>
                 <p className="mt-1 text-lg font-bold text-yellow-500">{p.rating.toFixed(1)}</p>
                 <p className="text-[11px] text-gray-400">{p.reviews} reviews</p>
@@ -505,9 +562,18 @@ function ReviewsTab({ brand }: { brand: BrandDetail }) {
                   <p className="text-[10px] font-semibold uppercase tracking-wider text-emerald-600">{loc.city}</p>
                   <p className="mt-0.5 text-sm font-semibold text-gray-800">{loc.area}</p>
                   <div className="mt-2 flex items-center gap-3 text-xs">
-                    <span className="flex items-center gap-1">🔴 <span className="font-semibold text-yellow-600">{loc.zomato.toFixed(1)}</span></span>
-                    <span className="flex items-center gap-1">🟠 <span className="font-semibold text-yellow-600">{loc.swiggy.toFixed(1)}</span></span>
-                    <span className="flex items-center gap-1"><Star className="h-3 w-3 fill-yellow-400 text-yellow-400" /><span className="font-semibold text-yellow-600">{loc.google.toFixed(1)}</span></span>
+                    <span className="flex items-center gap-1">
+                      <SiZomato className="h-3.5 w-3.5 shrink-0 text-[#E23744]" aria-hidden />
+                      <span className="font-semibold text-yellow-600">{loc.zomato.toFixed(1)}</span>
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <SiSwiggy className="h-3.5 w-3.5 shrink-0 text-[#FC8019]" aria-hidden />
+                      <span className="font-semibold text-yellow-600">{loc.swiggy.toFixed(1)}</span>
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <FaGoogle className="h-3.5 w-3.5 shrink-0 text-blue-600" aria-hidden />
+                      <span className="font-semibold text-yellow-600">{loc.google.toFixed(1)}</span>
+                    </span>
                   </div>
                 </button>
               ))}
@@ -537,12 +603,23 @@ function ReviewsTab({ brand }: { brand: BrandDetail }) {
               {/* Platform rating cards */}
               <div className="grid grid-cols-3 gap-3">
                 {[
-                  { name: 'ZOMATO', icon: '�', rating: selectedLocation.zomato, color: 'text-re(d-500' },
-                  { name: 'SWIGGY', icon: '🟠', rating: selectedLocation.swiggy, color: 'text-orange-500' },
-                  { name: 'GOOGLE', icon: '⭐', rating: selectedLocation.google, color: 'text-blue-500' },
+                  { name: 'ZOMATO', platform: 'zomato' as const, rating: selectedLocation.zomato, color: 'text-red-500' },
+                  { name: 'SWIGGY', platform: 'swiggy' as const, rating: selectedLocation.swiggy, color: 'text-orange-500' },
+                  { name: 'GOOGLE', platform: 'google' as const, rating: selectedLocation.google, color: 'text-blue-500' },
                 ].map((p) => (
                   <div key={p.name} className="rounded-lg border border-emerald-100 bg-emerald-50 p-4 text-center">
-                    <span className="text-2xl">{p.icon}</span>
+                    <div className="flex justify-center">
+                      <PlatformIcon
+                        platform={p.platform}
+                        className={`h-7 w-7 ${
+                          p.platform === 'zomato'
+                            ? 'text-[#E23744]'
+                            : p.platform === 'swiggy'
+                              ? 'text-[#FC8019]'
+                              : 'text-blue-600'
+                        }`}
+                      />
+                    </div>
                     <p className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400">{p.name}</p>
                     <p className={`mt-1 text-2xl font-bold ${p.color}`}>{p.rating.toFixed(1)}</p>
                   </div>
@@ -551,26 +628,95 @@ function ReviewsTab({ brand }: { brand: BrandDetail }) {
 
               {/* Platform filter tabs */}
               <div className="flex flex-wrap gap-2">
-                {(['all', 'zomato', 'swiggy', 'google'] as const).map((f) => (
-                  <button
-                    key={f}
-                    type="button"
-                    onClick={() => setPlatformFilter(f)}
-                    className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
-                      platformFilter === f
-                        ? 'bg-emerald-600 text-white'
-                        : 'border border-emerald-200 bg-white text-gray-600 hover:bg-emerald-50'
-                    }`}
-                  >
-                    {f === 'all' ? 'All' : f === 'zomato' ? '🔴 Zomato' : f === 'swiggy' ? '🟠 Swiggy' : '⭐ Google'}
-                  </button>
-                ))}
+                {(['all', 'zomato', 'swiggy', 'google'] as const).map((f) => {
+                  const active = platformFilter === f;
+                  return (
+                    <button
+                      key={f}
+                      type="button"
+                      onClick={() => setPlatformFilter(f)}
+                      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
+                        active
+                          ? 'bg-emerald-600 text-white'
+                          : 'border border-emerald-200 bg-white text-gray-600 hover:bg-emerald-50'
+                      }`}
+                    >
+                      {f === 'all' ? (
+                        'All'
+                      ) : (
+                        <>
+                          {f === 'zomato' && (
+                            <SiZomato className={`h-3.5 w-3.5 ${active ? 'text-white' : 'text-[#E23744]'}`} aria-hidden />
+                          )}
+                          {f === 'swiggy' && (
+                            <SiSwiggy className={`h-3.5 w-3.5 ${active ? 'text-white' : 'text-[#FC8019]'}`} aria-hidden />
+                          )}
+                          {f === 'google' && (
+                            <FaGoogle className={`h-3.5 w-3.5 ${active ? 'text-white' : 'text-blue-600'}`} aria-hidden />
+                          )}
+                          {f === 'zomato' ? 'Zomato' : f === 'swiggy' ? 'Swiggy' : 'Google'}
+                        </>
+                      )}
+                    </button>
+                  );
+                })}
               </div>
 
-              {/* Empty state — no individual reviews in mock */}
-              <div className="rounded-lg border border-dashed border-emerald-200 bg-gray-50 py-8 text-center">
-                <p className="text-sm text-gray-400">No reviews captured for this location yet</p>
-              </div>
+              {(() => {
+                const list = selectedLocation.reviews ?? [];
+                const filtered =
+                  platformFilter === 'all'
+                    ? list
+                    : list.filter((r) => r.platform === platformFilter);
+                if (filtered.length === 0) {
+                  return (
+                    <div className="rounded-lg border border-dashed border-emerald-200 bg-gray-50 py-8 text-center">
+                      <p className="text-sm text-gray-400">No reviews captured for this location yet</p>
+                    </div>
+                  );
+                }
+                return (
+                  <ul className="space-y-3">
+                    {filtered.map((r) => (
+                      <li
+                        key={r.id}
+                        className="rounded-lg border border-gray-100 bg-white p-3 text-left shadow-sm"
+                      >
+                        <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500">
+                          <span className="font-semibold text-gray-800">{r.author}</span>
+                          <span className="flex items-center gap-0.5 text-yellow-600">
+                            <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                            {r.rating.toFixed(1)}
+                          </span>
+                          <span className="text-gray-400">{r.date}</span>
+                          <span
+                            className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase ${
+                              r.platform === 'zomato'
+                                ? 'bg-red-50 text-red-600'
+                                : r.platform === 'swiggy'
+                                  ? 'bg-orange-50 text-orange-600'
+                                  : 'bg-blue-50 text-blue-600'
+                            }`}
+                          >
+                            <PlatformIcon
+                              platform={r.platform}
+                              className={`h-3 w-3 ${
+                                r.platform === 'zomato'
+                                  ? 'text-red-600'
+                                  : r.platform === 'swiggy'
+                                    ? 'text-orange-600'
+                                    : 'text-blue-600'
+                              }`}
+                            />
+                            {r.platform}
+                          </span>
+                        </div>
+                        <p className="mt-2 text-sm leading-relaxed text-gray-700">{r.text}</p>
+                      </li>
+                    ))}
+                  </ul>
+                );
+              })()}
             </div>
           </div>
         )}
@@ -757,11 +903,11 @@ function FofoTab({ brand }: { brand: BrandDetail }) {
 
 /* ── Location Intel Tab ── */
 function LocationTab({ brand }: { brand: BrandDetail }) {
-  const [areaInput, setAreaInput] = useState(brand.locationIntel.defaultArea);
-  const [activeArea, setActiveArea] = useState(brand.locationIntel.defaultArea);
-  const [status, setStatus] = useState<'idle' | 'loading' | 'done'>('done');
-  const [loadStep, setLoadStep] = useState(0);
   const loc = brand.locationIntel;
+  const [areaInput, setAreaInput] = useState('');
+  const [activeArea, setActiveArea] = useState(loc.defaultArea);
+  const [status, setStatus] = useState<'idle' | 'loading' | 'done'>('idle');
+  const [loadStep, setLoadStep] = useState(0);
 
   // Get data for the currently analysed area, fall back to first available
   const areaData: AreaData = loc.areas[activeArea] ?? Object.values(loc.areas)[0];
@@ -838,7 +984,8 @@ function LocationTab({ brand }: { brand: BrandDetail }) {
               <button
                 key={area}
                 type="button"
-                onClick={() => { setAreaInput(area); setStatus('idle'); }}                className={`rounded-full border px-2.5 py-0.5 text-xs font-medium transition-colors ${
+                onClick={() => { setAreaInput(area); setStatus('idle'); }}
+                className={`rounded-full border px-2.5 py-0.5 text-xs font-medium transition-colors ${
                   areaInput === area
                     ? 'border-emerald-500 bg-emerald-100 text-emerald-700'
                     : 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
@@ -1025,13 +1172,6 @@ function LocationTab({ brand }: { brand: BrandDetail }) {
               </div>
             </div>
           </>
-        )}
-
-        {/* Idle — prompt to analyse */}
-        {status === 'idle' && (
-          <div className="rounded-xl border border-dashed border-emerald-200 bg-emerald-50 py-12 text-center">
-            <p className="text-sm text-gray-500">Click <span className="font-semibold text-emerald-700">Analyse Area</span> to load location intelligence</p>
-          </div>
         )}
       </div>
 
