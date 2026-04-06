@@ -522,7 +522,7 @@ function ReviewsTab({ brand }: { brand: BrandDetail }) {
               <span className="text-xs text-gray-400">total reviews</span>
             </div>
             <div className="flex-1 space-y-1.5">
-              {[...s.ratingBreakdown].reverse().map((r) => (
+              {s.ratingBreakdown.map((r) => (
                 <div key={r.star} className="flex items-center gap-2 text-xs text-gray-500">
                   <span className="w-2 text-right">{r.star}</span>
                   <div className="h-2 flex-1 rounded-full bg-gray-100">
