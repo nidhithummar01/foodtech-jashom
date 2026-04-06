@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Inbox } from 'lucide-react';
 import { FcViewDetails } from 'react-icons/fc';
 import Badge from '../components/ui/Badge';
@@ -6,56 +7,55 @@ import Button from '../components/ui/Button';
 import EmptyState from '../components/ui/EmptyState';
 import Input from '../components/ui/Input';
 import Loader from '../components/ui/Loader';
-import ViewDetailsModal, { emailPill, viewStatusPill } from '../components/ui/ViewDetailsModal';
 import Select from '../components/ui/Select';
 import Table, { TableCell, TableRow } from '../components/ui/Table';
-import { restaurantsMock } from '../data/restaurants.mock';
-import type { Restaurant } from '../types/restaurant';
+import { brandsMock } from '../data/brands.mock';
+import type { Brand } from '../types/brand';
 
-type RestaurantStatus = 'Active' | 'Pending' | 'Blocked';
+type BrandStatus = 'Active' | 'Pending' | 'Blocked';
 
-type RestaurantWithMeta = Restaurant & {
+type BrandWithMeta = Brand & {
   owner?: string;
   createdAt?: string;
 };
 
-type RestaurantRow = Restaurant & {
+type BrandRow = Brand & {
   owner: string;
   createdDate: string;
-  status: RestaurantStatus;
+  status: BrandStatus;
 };
 
-function RestaurantsPage() {
+function BrandsPage() {
   const [loading, setLoading] = useState(true);
-  const [restaurants, setRestaurants] = useState<RestaurantRow[]>([]);
+  const [brands, setBrands] = useState<BrandRow[]>([]);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
-  const [selectedRestaurant, setSelectedRestaurant] = useState<RestaurantRow | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timeout = window.setTimeout(() => {
-      const normalizedData: RestaurantRow[] = (restaurantsMock as RestaurantWithMeta[]).map((item, index) => {
-        const fallbackStatus: RestaurantStatus =
+      const normalizedData: BrandRow[] = (brandsMock as BrandWithMeta[]).map((item, index) => {
+        const fallbackStatus: BrandStatus =
           index % 3 === 0 ? 'Blocked' : index % 2 === 0 ? 'Pending' : 'Active';
 
         return {
           ...item,
           owner: item.owner ?? 'N/A',
           createdDate: item.createdAt ?? '2024-01-01',
-          status: (item.status as RestaurantStatus) ?? fallbackStatus,
+          status: (item.status as BrandStatus) ?? fallbackStatus,
         };
       });
 
-      setRestaurants(normalizedData);
+      setBrands(normalizedData);
       setLoading(false);
     }, Math.floor(Math.random() * 401) + 800);
 
     return () => window.clearTimeout(timeout);
   }, []);
 
-  const filteredRestaurants = useMemo(
+  const filteredBrands = useMemo(
     () =>
-      restaurants.filter((item) => {
+      brands.filter((item) => {
         const matchesSearch =
           search.trim().length === 0 ||
           item.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -64,7 +64,7 @@ function RestaurantsPage() {
         const matchesStatus = statusFilter.length === 0 || item.status === statusFilter;
         return matchesSearch && matchesStatus;
       }),
-    [restaurants, search, statusFilter],
+    [brands, search, statusFilter],
   );
 
   if (loading) {
@@ -80,14 +80,14 @@ function RestaurantsPage() {
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         <Input
           label="Search"
-          name="restaurantSearch"
+          name="brandSearch"
           placeholder="Search by name, owner, or city"
           value={search}
           onChange={(event) => setSearch(event.target.value)}
         />
         <Select
           label="Status"
-          name="restaurantStatus"
+          name="brandStatus"
           value={statusFilter}
           onChange={(event) => setStatusFilter(event.target.value)}
           options={[
@@ -99,17 +99,17 @@ function RestaurantsPage() {
         />
       </div>
 
-      {filteredRestaurants.length === 0 ? (
+      {filteredBrands.length === 0 ? (
         <EmptyState
-          title="No restaurants available yet"
-          message="Try changing filters or add your first restaurant."
+          title="No brands available yet"
+          message="Try changing filters or add your first brand."
           icon={<Inbox className="h-5 w-5" />}
-          actionLabel="Add Restaurant"
+          actionLabel="Add Brand"
           onAction={() => undefined}
         />
       ) : (
-        <Table headers={['Restaurant Name', 'Owner', 'City', 'Status', 'Created Date', 'Actions']}>
-          {filteredRestaurants.map((item) => (
+        <Table headers={['Brand Name', 'Owner', 'City', 'Status', 'Created Date', 'Actions']}>
+          {filteredBrands.map((item) => (
             <TableRow key={item.id}>
               <TableCell className="font-medium text-gray-800">{item.name}</TableCell>
               <TableCell>{item.owner}</TableCell>
@@ -134,7 +134,7 @@ function RestaurantsPage() {
                   size="sm"
                   className="!border-2 !border-emerald-400 px-2 hover:!border-emerald-500 hover:bg-emerald-50"
                   aria-label="View details"
-                  onClick={() => setSelectedRestaurant(item)}
+                  onClick={() => navigate(`/brands/${item.id}`)}
                 >
                   <FcViewDetails className="h-4 w-4 shrink-0" aria-hidden />
                 </Button>
@@ -143,33 +143,8 @@ function RestaurantsPage() {
           ))}
         </Table>
       )}
-
-      <ViewDetailsModal
-        isOpen={Boolean(selectedRestaurant)}
-        onClose={() => setSelectedRestaurant(null)}
-        title="Restaurant Details"
-        compact
-        initialsFrom={selectedRestaurant?.name ?? ''}
-        rows={
-          selectedRestaurant
-            ? [
-                {
-                  label: 'Name:',
-                  value: <span className="font-semibold text-slate-900">{selectedRestaurant.name}</span>,
-                },
-                {
-                  label: 'Owner:',
-                  value: <span className="font-semibold text-slate-900">{selectedRestaurant.owner}</span>,
-                },
-                { label: 'City:', value: emailPill(selectedRestaurant.city, true) },
-                { label: 'Status:', value: viewStatusPill(selectedRestaurant.status) },
-                { label: 'Created Date:', value: selectedRestaurant.createdDate },
-              ]
-            : []
-        }
-      />
     </div>
   );
 }
 
-export default RestaurantsPage;
+export default BrandsPage;

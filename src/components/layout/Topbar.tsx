@@ -6,10 +6,7 @@ import { setAuthenticated } from '../../utils/auth';
 const routeTitles: Record<string, string> = {
   '/dashboard': 'Dashboard',
   '/users': 'Users',
-  '/restaurants': 'Restaurants',
-  '/orders': 'Orders',
-  '/reports': 'Reports',
-  '/franchises': 'Franchises',
+  '/brands': 'Brands',
   '/settings': 'Settings',
 };
 
@@ -20,8 +17,8 @@ function Topbar() {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
   return (
-    <header className="flex h-16 w-full items-center justify-between border-b border-emerald-100 bg-white px-6">
-      <h1 className="text-lg font-semibold text-emerald-900">{pageTitle}</h1>
+    <header className="flex h-16 w-full items-center justify-between border-b border-emerald-100 bg-white px-4 sm:px-6">
+      <h1 className="pl-12 text-base font-semibold text-emerald-900 md:pl-0 md:text-lg">{pageTitle}</h1>
       <div className="flex items-center gap-4">
         <button
           type="button"

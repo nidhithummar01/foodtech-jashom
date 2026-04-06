@@ -1,4 +1,4 @@
-export type Restaurant = {
+export type Brand = {
   id: string;
   name: string;
   city: string;

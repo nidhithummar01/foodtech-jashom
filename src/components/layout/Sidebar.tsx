@@ -2,21 +2,16 @@ import { Menu, X } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { useState, type ComponentType } from 'react';
 import clsx from 'clsx';
-import { MdDashboard, MdOutlineShoppingBag } from 'react-icons/md';
+import { MdDashboard } from 'react-icons/md';
 import { LuUsers } from 'react-icons/lu';
 import { IoStorefront, IoSettings } from 'react-icons/io5';
-import { TbReportSearch } from 'react-icons/tb';
-import { FaMapLocationDot } from 'react-icons/fa6';
 
 type IconProps = { className?: string };
 
 const menuItems: Array<{ label: string; to: string; Icon: ComponentType<IconProps> }> = [
   { label: 'Dashboard', to: '/dashboard', Icon: MdDashboard },
   { label: 'Users', to: '/users', Icon: LuUsers },
-  { label: 'Restaurants', to: '/restaurants', Icon: IoStorefront },
-  { label: 'Orders', to: '/orders', Icon: MdOutlineShoppingBag },
-  { label: 'Reports', to: '/reports', Icon: TbReportSearch },
-  { label: 'Franchises', to: '/franchises', Icon: FaMapLocationDot },
+  { label: 'Brands', to: '/brands', Icon: IoStorefront },
   { label: 'Settings', to: '/settings', Icon: IoSettings },
 ];
 

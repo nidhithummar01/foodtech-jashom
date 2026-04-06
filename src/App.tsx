@@ -23,7 +23,7 @@ function App() {
       <Sidebar />
       <div className="flex min-h-screen flex-col md:pl-64">
         <Topbar />
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-3 sm:p-6">
           <AppRoutes />
         </main>
       </div>

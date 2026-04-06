@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react';
 import { Inbox } from 'lucide-react';
 import EmptyState from '../components/ui/EmptyState';
 import { dashboardMock } from '../data/dashboard.mock';
-import { franchisesMock } from '../data/franchises.mock';
 
 type ActivityItem = {
   id: string;
@@ -13,8 +12,7 @@ type ActivityItem = {
 
 type DashboardData = {
   totalUsers: number;
-  totalRestaurants: number;
-  totalOrders: number;
+  totalBrands: number;
   revenue: number;
   recentActivity?: ActivityItem[];
 };
@@ -43,10 +41,8 @@ function DashboardPage() {
 
     return [
       { label: 'Total Users', value: data.totalUsers.toLocaleString() },
-      { label: 'Total Restaurants', value: data.totalRestaurants.toLocaleString() },
-      { label: 'Total Orders', value: data.totalOrders.toLocaleString() },
+      { label: 'Total Brands', value: data.totalBrands.toLocaleString() },
       { label: 'Revenue', value: `₹${data.revenue.toLocaleString()}` },
-      { label: 'Total Franchises', value: franchisesMock.length.toLocaleString() },
     ];
   }, [data]);
 
@@ -55,8 +51,8 @@ function DashboardPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {[1, 2, 3, 4].map((i) => (
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {[1, 2, 3].map((i) => (
             <div key={i} className="h-24 bg-gray-300 rounded-lg animate-pulse" />
           ))}
         </div>
@@ -66,7 +62,7 @@ function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <section className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <section className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
         {kpis.map((item) => (
           <div key={item.label} className="rounded-lg border border-emerald-100 bg-white p-4 shadow-sm">
             <p className="text-sm text-gray-600">{item.label}</p>
@@ -75,11 +71,7 @@ function DashboardPage() {
         ))}
       </section>
 
-      <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <div className="rounded-lg border border-emerald-100 bg-white p-4 shadow-sm">
-          <h2 className="text-sm font-medium text-emerald-900">Orders Overview</h2>
-          <div className="mt-3 h-48 rounded-lg border border-dashed bg-gray-50" />
-        </div>
+      <section className="grid grid-cols-1 gap-4 lg:grid-cols-1">
         <div className="rounded-lg border border-emerald-100 bg-white p-4 shadow-sm">
           <h2 className="text-sm font-medium text-emerald-900">Revenue Trend</h2>
           <div className="mt-3 h-48 rounded-lg border border-dashed bg-gray-50" />

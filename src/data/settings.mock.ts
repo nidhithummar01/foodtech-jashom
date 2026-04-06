@@ -8,10 +8,5 @@ export const settingsMock = {
     notificationsEnabled: true,
     darkModeEnabled: false,
   },
-  franchise: {
-    defaultCommissionPercent: '10',
-    maxOutletsPerFranchise: '50',
-    approvalRequired: true,
-  },
 };
 

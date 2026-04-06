@@ -1,10 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import LoginPage from '../pages/LoginPage';
 import DashboardPage from '../pages/DashboardPage';
-import FranchisesPage from '../pages/FranchisesPage';
-import OrdersPage from '../pages/OrdersPage';
-import ReportsPage from '../pages/ReportsPage';
-import RestaurantsPage from '../pages/RestaurantsPage';
+import BrandsPage from '../pages/BrandsPage';
+import BrandDetailPage from '../pages/BrandDetailPage';
 import NewPasswordPage from '../pages/NewPasswordPage';
 import OtpPage from '../pages/OtpPage';
 import ResetPage from '../pages/ResetPage';
@@ -24,10 +22,8 @@ function AppRoutes() {
       <Route path="/new-password" element={<NewPasswordPage />} />
       <Route path="/dashboard" element={authed ? <DashboardPage /> : <Navigate to="/login" replace />} />
       <Route path="/users" element={authed ? <UsersPage /> : <Navigate to="/login" replace />} />
-      <Route path="/restaurants" element={authed ? <RestaurantsPage /> : <Navigate to="/login" replace />} />
-      <Route path="/orders" element={authed ? <OrdersPage /> : <Navigate to="/login" replace />} />
-      <Route path="/reports" element={authed ? <ReportsPage /> : <Navigate to="/login" replace />} />
-      <Route path="/franchises" element={authed ? <FranchisesPage /> : <Navigate to="/login" replace />} />
+      <Route path="/brands" element={authed ? <BrandsPage /> : <Navigate to="/login" replace />} />
+      <Route path="/brands/:id" element={authed ? <BrandDetailPage /> : <Navigate to="/login" replace />} />
       <Route path="/settings" element={authed ? <SettingsPage /> : <Navigate to="/login" replace />} />
     </Routes>
   );
