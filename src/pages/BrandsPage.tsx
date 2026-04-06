@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Inbox } from 'lucide-react';
-import { FcViewDetails } from 'react-icons/fc';
 import Badge from '../components/ui/Badge';
 import Button from '../components/ui/Button';
 import EmptyState from '../components/ui/EmptyState';
@@ -132,11 +131,10 @@ function BrandsPage() {
                 <Button
                   variant="secondary"
                   size="sm"
-                  className="!border-2 !border-emerald-400 px-2 hover:!border-emerald-500 hover:bg-emerald-50"
-                  aria-label="View details"
+                  className="!border-2 !border-emerald-400 px-3 hover:!border-emerald-500 hover:bg-emerald-50"
                   onClick={() => navigate(`/brands/${item.id}`)}
                 >
-                  <FcViewDetails className="h-4 w-4 shrink-0" aria-hidden />
+                  View profile
                 </Button>
               </TableCell>
             </TableRow>

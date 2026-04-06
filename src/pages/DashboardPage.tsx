@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Inbox } from 'lucide-react';
 import EmptyState from '../components/ui/EmptyState';
+import { brandsMock } from '../data/brands.mock';
 import { dashboardMock } from '../data/dashboard.mock';
 
 type ActivityItem = {
@@ -27,7 +28,10 @@ function DashboardPage() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setData(dashboardMock as DashboardData);
+      setData({
+        ...(dashboardMock as DashboardData),
+        totalBrands: brandsMock.length,
+      });
       setLoading(false);
     }, 900);
 
