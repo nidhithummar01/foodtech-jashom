@@ -196,51 +196,97 @@ function BrandDetailPage() {
 }
 
 /* ── About Tab ── */
+const auraBarTextClass: Record<string, string> = {
+  'bg-yellow-400': 'text-yellow-600',
+  'bg-emerald-400': 'text-emerald-600',
+  'bg-blue-400': 'text-blue-600',
+  'bg-red-400': 'text-red-600',
+  'bg-orange-400': 'text-orange-600',
+};
+
+function AboutSectionCard({ children }: { children: React.ReactNode }) {
+  return <div className="rounded-xl border border-emerald-100 bg-white p-4 shadow-sm sm:p-5">{children}</div>;
+}
+
+function AboutSectionHeader({
+  emoji,
+  title,
+  right,
+}: {
+  emoji: string;
+  title: string;
+  right?: React.ReactNode;
+}) {
+  return (
+    <div className="mb-4 flex items-center justify-between gap-3">
+      <div className="flex min-w-0 items-center gap-2.5">
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-gray-100 text-lg leading-none shadow-sm">
+          {emoji}
+        </div>
+        <h2 className="text-sm font-semibold text-gray-900">{title}</h2>
+      </div>
+      {right}
+    </div>
+  );
+}
+
 function AboutTab({ brand }: { brand: BrandDetail }) {
   return (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">      <div className="space-y-6 lg:col-span-2">
-        <div>
-          <h2 className="mb-4 text-sm font-semibold text-gray-800">🏢 Brand Overview</h2>
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <div className="space-y-6 lg:col-span-2">
+        <AboutSectionCard>
+          <AboutSectionHeader emoji="🏢" title="Brand Overview" />
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <OverviewField label="FOUNDED" value={brand.founded} />
             <OverviewField label="CATEGORY" value={brand.category} />
             <OverviewField label="FORMATS" value={brand.formats} valueClass="text-emerald-600" />
             <OverviewField label="PRESENCE" value={brand.presence} />
           </div>
-          <div className="mt-3 rounded-lg border border-gray-100 bg-gray-50 p-3">
+          <div className="mt-3 rounded-lg border border-gray-200 bg-gray-50/80 p-3 sm:p-4">
             <p className="text-[11px] font-medium uppercase tracking-wide text-gray-400">BRAND TAGLINE</p>
-            <p className="mt-1 text-sm italic text-gray-600">{brand.tagline}</p>
+            <p className="mt-1.5 text-sm italic leading-relaxed text-gray-600">{brand.tagline}</p>
           </div>
-        </div>
-        <div>
-          <h2 className="mb-4 text-sm font-semibold text-gray-800">✨ Key Highlights</h2>
-          <ul className="space-y-2">
+        </AboutSectionCard>
+
+        <AboutSectionCard>
+          <AboutSectionHeader emoji="✨" title="Key Highlights" />
+          <ul className="space-y-2.5">
             {brand.highlights.map((h) => (
-              <li key={h} className="flex items-start gap-2 text-sm text-gray-700">
-                <span className="mt-0.5 text-emerald-500">✓</span>{h}
+              <li key={h} className="flex items-start gap-2.5 text-sm text-gray-700">
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-600">
+                  ✓
+                </span>
+                <span className="leading-snug">{h}</span>
               </li>
             ))}
           </ul>
-        </div>
-        <div>
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-sm font-semibold text-gray-800">📊 Score Breakdown</h2>
-            <span className="text-sm font-semibold text-gray-500">{brand.auraScore} / 100</span>
-          </div>
-          <div className="space-y-3">
-            {brand.auraBreakdown.map((item) => (
-              <div key={item.label}>
-                <div className="mb-1 flex items-center justify-between text-xs text-gray-600">
-                  <span>{item.label}</span>
-                  <span className="font-semibold text-gray-800">{item.score}</span>
+        </AboutSectionCard>
+
+        <AboutSectionCard>
+          <AboutSectionHeader
+            emoji="📊"
+            title="Score Breakdown"
+            right={<span className="shrink-0 text-sm font-medium tabular-nums text-gray-500">{brand.auraScore} / 100</span>}
+          />
+          <div className="space-y-4">
+            {brand.auraBreakdown.map((item) => {
+              const scoreText = auraBarTextClass[item.color] ?? 'text-gray-700';
+              return (
+                <div key={item.label} className="grid grid-cols-1 items-center gap-2 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,2fr)_auto] sm:gap-4">
+                  <span className="text-xs text-gray-600 sm:text-sm">{item.label}</span>
+                  <div className="relative flex h-5 w-full min-w-0 items-center sm:order-none">
+                    <div className="absolute inset-x-0 h-px rounded-full bg-gray-200" />
+                    <div
+                      className={`relative z-[1] h-2.5 rounded-full shadow-sm ${item.color}`}
+                      style={{ width: `${item.score}%` }}
+                    />
+                  </div>
+                  <span className={`text-right text-sm font-semibold tabular-nums sm:w-10 ${scoreText}`}>{item.score}</span>
                 </div>
-                <div className="h-2 w-full rounded-full bg-gray-100">
-                  <div className={`h-2 rounded-full ${item.color}`} style={{ width: `${item.score}%` }} />
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
-        </div>
+        </AboutSectionCard>
       </div>
       <div className="space-y-6">
         <div>
@@ -1040,9 +1086,9 @@ function StatCard({ label, value, valueClass }: { label: string; value: string; 
 
 function OverviewField({ label, value, valueClass = 'text-gray-800' }: { label: string; value: string; valueClass?: string }) {
   return (
-    <div className="rounded-lg border border-gray-100 bg-gray-50 p-3">
+    <div className="rounded-lg border border-gray-200 bg-gray-50 p-3 sm:p-3.5">
       <p className="text-[11px] font-medium uppercase tracking-wide text-gray-400">{label}</p>
-      <p className={`mt-1 text-sm font-medium ${valueClass}`}>{value}</p>
+      <p className={`mt-1.5 font-mono text-sm font-medium leading-snug ${valueClass}`}>{value}</p>
     </div>
   );
 }
