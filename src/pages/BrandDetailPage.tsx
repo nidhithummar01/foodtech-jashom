@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Star, MapPin } from 'lucide-react';
-import { SiSwiggy, SiZomato } from 'react-icons/si';
+import { SiSwiggy } from 'react-icons/si';
 import { brandsMock } from '../data/brands.mock';
 
 /** Multicolor Google “G” (brand colors: blue, red, yellow, green) */
@@ -28,6 +28,26 @@ function GoogleIcon({ className }: { className?: string }) {
   );
 }
 
+/**
+ * Zomato mark — same outer box as SiSwiggy / GoogleIcon.
+ * Slightly under-filled vs the box so it reads medium-sized next to vector icons.
+ */
+function ZomatoLogo({ className }: { className?: string }) {
+  const box = className ?? 'h-5 w-5';
+  return (
+    <span className={`inline-flex shrink-0 items-center justify-center overflow-visible leading-none ${box}`} aria-hidden>
+      <img
+        src="/zomato-logo.png"
+        alt=""
+        width={48}
+        height={48}
+        draggable={false}
+        className="h-full w-full origin-center object-contain scale-[0.88]"
+      />
+    </span>
+  );
+}
+
 function PlatformIcon({
   platform,
   className,
@@ -38,7 +58,7 @@ function PlatformIcon({
   const cn = className ?? 'h-5 w-5';
   switch (platform) {
     case 'zomato':
-      return <SiZomato className={`${cn} origin-center scale-[1.4]`} aria-hidden />;
+      return <ZomatoLogo className={cn} />;
     case 'swiggy':
       return <SiSwiggy className={cn} aria-hidden />;
     case 'google':
@@ -48,7 +68,7 @@ function PlatformIcon({
 
 function PlatformIconByName({ name, className }: { name: string; className?: string }) {
   const n = name.toLowerCase();
-  if (n === 'zomato') return <SiZomato className={`${className} origin-center scale-[1.4]`} aria-hidden />;
+  if (n === 'zomato') return <ZomatoLogo className={className} />;
   if (n === 'swiggy') return <SiSwiggy className={className} aria-hidden />;
   if (n === 'google') return <GoogleIcon className={className} />;
   return null;
@@ -542,11 +562,9 @@ function ReviewsTab({ brand }: { brand: BrandDetail }) {
                     className={
                       p.name.toLowerCase() === 'google'
                         ? 'h-6 w-6'
-                        : `h-6 w-6 ${
-                            p.name.toLowerCase() === 'zomato'
-                              ? 'text-[#E23744]'
-                              : 'text-[#FC8019]'
-                          }`
+                        : p.name.toLowerCase() === 'zomato'
+                          ? 'h-6 w-6'
+                          : 'h-6 w-6 text-[#FC8019]'
                     }
                   />
                 </div>
@@ -588,15 +606,15 @@ function ReviewsTab({ brand }: { brand: BrandDetail }) {
                   <p className="mt-0.5 text-sm font-semibold text-gray-800">{loc.area}</p>
                   <div className="mt-2 flex items-center gap-3 text-xs">
                     <span className="flex items-center gap-1">
-                      <SiZomato className="h-6 w-6 shrink-0 origin-center text-[#E23744]" aria-hidden />
+                      <ZomatoLogo className="h-6 w-6" />
                       <span className="font-semibold text-yellow-600">{loc.zomato.toFixed(1)}</span>
                     </span>
                     <span className="flex items-center gap-1">
-                      <SiSwiggy className="h-3.5 w-3.5 shrink-0 text-[#FC8019]" aria-hidden />
+                      <SiSwiggy className="h-6 w-6 shrink-0 text-[#FC8019]" aria-hidden />
                       <span className="font-semibold text-yellow-600">{loc.swiggy.toFixed(1)}</span>
                     </span>
                     <span className="flex items-center gap-1">
-                      <GoogleIcon className="h-3.5 w-3.5 shrink-0" />
+                      <GoogleIcon className="h-6 w-6 shrink-0" />
                       <span className="font-semibold text-yellow-600">{loc.google.toFixed(1)}</span>
                     </span>
                   </div>
@@ -639,11 +657,9 @@ function ReviewsTab({ brand }: { brand: BrandDetail }) {
                         className={
                           p.platform === 'google'
                             ? 'h-7 w-7'
-                            : `h-7 w-7 ${
-                                p.platform === 'zomato'
-                                  ? 'text-[#E23744]'
-                                  : 'text-[#FC8019]'
-                              }`
+                            : p.platform === 'zomato'
+                              ? 'h-7 w-7'
+                              : 'h-7 w-7 text-[#FC8019]'
                         }
                       />
                     </div>
@@ -672,14 +688,12 @@ function ReviewsTab({ brand }: { brand: BrandDetail }) {
                         'All'
                       ) : (
                         <>
-                          {f === 'zomato' && (
-                            <SiZomato className={`h-6 w-6 origin-center ${active ? 'text-white' : 'text-[#E23744]'}`} aria-hidden />
-                          )}
+                          {f === 'zomato' && <ZomatoLogo className="h-6 w-6" />}
                           {f === 'swiggy' && (
-                            <SiSwiggy className={`h-3.5 w-3.5 ${active ? 'text-white' : 'text-[#FC8019]'}`} aria-hidden />
+                            <SiSwiggy className={`h-6 w-6 shrink-0 ${active ? 'text-white' : 'text-[#FC8019]'}`} aria-hidden />
                           )}
                           {f === 'google' && (
-                            <GoogleIcon className={`h-3.5 w-3.5 shrink-0 ${active ? 'brightness-0 invert' : ''}`} />
+                            <GoogleIcon className={`h-6 w-6 shrink-0 ${active ? 'brightness-0 invert' : ''}`} />
                           )}
                           {f === 'zomato' ? 'Zomato' : f === 'swiggy' ? 'Swiggy' : 'Google'}
                         </>
@@ -729,12 +743,10 @@ function ReviewsTab({ brand }: { brand: BrandDetail }) {
                               platform={r.platform}
                               className={
                                 r.platform === 'google'
-                                  ? 'h-3 w-3'
-                                  : `h-3 w-3 ${
-                                      r.platform === 'zomato'
-                                        ? 'text-red-600'
-                                        : 'text-orange-600'
-                                    }`
+                                  ? 'h-4 w-4'
+                                  : r.platform === 'zomato'
+                                    ? 'h-4 w-4'
+                                    : 'h-4 w-4 text-orange-600'
                               }
                             />
                             {r.platform}
